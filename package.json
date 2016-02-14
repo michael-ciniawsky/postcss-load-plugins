@@ -1,5 +1,5 @@
 {
-  "name": "postcss-load-plugins",
+  "name": "postcss-loads-plugins",
   "version": "0.1.0",
   "description": "Autoload Plugins for PostCSS",
   "engines": {

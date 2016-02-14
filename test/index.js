@@ -2,12 +2,12 @@
 
 const fs = require('fs')
 
-var posthtml = require('posthtml')
+var postcss = require('postcss')
 
 var plugins = require('../index')()
 
-var html = fs.readFileSync('./index.html', 'utf-8')
+var css = fs.readFileSync('./index.html', 'utf-8').toString()
 
-posthtml(plugins)
-  .process(html)
-  .then(result => console.log(result.html))
+postcss(plugins)
+  .process(css)
+  .then(result => console.log(result.css))
