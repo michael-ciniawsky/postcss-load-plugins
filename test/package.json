@@ -1,0 +1,34 @@
+{
+  "name": "postcss-load-plugins-example",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=4"
+  },
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "http:/github.com/michael-ciniawsky/posthtml-load-plugins"
+  },
+  "author": {
+    "name": "Michael Ciniawky",
+    "email": "michael.ciniawsky@gmail.com"
+  },
+  "license": "MIT",
+  "description": "Autoload Plugins for PostHTML",
+  "postcss": {
+    "bem": {
+      "elemPrefix": "__",
+      "modPrefix": "-",
+      "modDlmtr": "--"
+    },
+    "include": {
+      "root": "./",
+      "encoding": "utf-8"
+    },
+    "styleToFile": {
+      "path": "./dist/style.css"
+    }
+  }
+}

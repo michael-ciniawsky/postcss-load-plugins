@@ -1,0 +1,26 @@
+{
+  "name": "postcss-load-plugins",
+  "version": "0.1.0",
+  "description": "Autoload Plugins for PostCSS",
+  "engines": {
+    "node": ">=4"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "postcss": "^5.0.16"
+  },
+  "devDependencies": {},
+  "author": {
+    "name": "Michael Ciniawky",
+    "email": "michael.ciniawsky@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michael-ciniawsky/postcss-load-plugins.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michael-ciniawsky/postcss-load-plugins/issues"
+  },
+  "homepage": "https://github.com/michael-ciniawsky/postcss-load-plugins#readme",
+  "license": "MIT"
+}
