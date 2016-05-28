@@ -4,16 +4,21 @@
 
 'use strict'
 
-let postcss = require('postcss')
+const fs = require('fs')
+const path = require('path')
 
-exports = module.exports = function (options) {
+const postcss = require('postcss')
+
+exports = module.exports = function (plugins, options) {
+
+
   if (typeof options === 'string') {
-    options = require(`${process.cwd() + '/' + options}`)
+    options = require(path.join(process.cwd(), options)) // ? `${}`
   } else {
     options = options || require(`${process.cwd() + '/package.json'}`).postcss || {}
   }
 
-  var pkg = require(`${process.cwd() + '/package.json'}`)
+  var pkg = require(`${path.join(process.cwd(), '/package.json')}`)
 
   function Processor (plugin, options) {
     function namespace (plugin) {
