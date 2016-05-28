@@ -1,85 +1,96 @@
-# Autoload Plugins for [PostCSS](https://github.com/postcss/postcss)
+[![NPM][npm]][npm-url]
+[![Node][node]][node-url]
+[![Dependencies][deps]][deps-url]
+[![DevDependencies][devdeps]][devdeps-url]
+[![Standard Code Style][style]][style-url]
+
+# PostCSS Load Plugins
+
+## Status
+
+| Branch               | Build                     | Coverage                 |
+|:--------------------:|:-------------------------:|:------------------------:|
+|  Master              | ![travis]                 | ![cover]                 |
+|  Release/v1.0.0      | ![travis-rel]             | ![cover-rel]             |
 
 ## Install
 
 ```bash
-(sudo) npm i -D postcss-loads-plugins
+npm i -D postcss-loads-plugins
 ```
-[![npm](https://badge.fury.io/js/postcss-loads-plugins.svg)](https://badge.fury.io/js/postcss-loads-plugins) [![dependencies](https://david-dm.org/michael-ciniawsky/postcss-loads-plugins.svg)](https://david-dm.org/michael-ciniawsky/postcss-loads-plugins)
 
 ## Usage
 
-Plugins will be loaded directly from your projects ***package.json*** file.
-Install them as usual with ``` npm i -S ``` or ``` npm i -D ```.
+Plugins will load directly from your projects ***package.json*** file.
+Install them as usual with ``` npm i -S postcss-plugin``` or ``` npm i -D postcss-plugin ```.
 
 [PostCSS Plugins](https://postcss.parts)
 
-After installing your plugins there a three ways to declare your plugin options.
+After installing your plugins there a two common ways to declare your plugin options.
 
-- Set options directly as arguments.
-- Set options in your ***package.json***.
-- Create a separated ***[name].[ext]*** file, where ***[name]*** is any name you like and ***[ext]*** should be either ``` .js ``` or ``` .json ```.
-For an example of well formed options file see below.
+- Set plugins in your **package.json**.
+- Create a separated **postcss.config.js**  or  **postcssrc.json*** file
 
 ## Options
 
-### package.json
+#### package.json
 
 ```json
 {
  "dependencies": {
    "postcss-bem": "^0.2.2",
-   "postcss-for": "^1.0.1",
-   "posthtml-import": "^1.0.2"
  },
- "devDependencies": {
-   "postcss-conditionals": "^0.1.1"
- },
-
+ "devDependencies": {},
  "postcss": {
-   "bem": {
-     "defaultNamespace": "undefined",
-     "style": "bem",
-     "separators": {
-       "namespace": "-",
-       "descendent":"__",
-       "modifier": "--"
-     },
-     "shortcuts": {
-       "component": "block",
-       "descendent": "elem",
-       "modifier": "mods"
-     }
-   }  
+   "parser": "sugarss",
+   "plugins": {
+     "postcss-bem": {
+       "defaultNamespace": "undefined",
+       "style": "bem",
+       "separators": {
+         "namespace": "-",
+         "descendent":"__",
+         "modifier": "--"
+       },
+       "shortcuts": {
+         "component": "block",
+         "descendent": "elem",
+         "modifier": "mods"
+       }
+     }  
+   }
  }
 }
 ```
 
-### [name].[ext]
+#### postcss.config.js
 
-#### JS
 ```js
 module.exports = {
-  bem: {
-    defaultNamespace: undefined,
-    style: 'bem',
-    separators: {
-      namespace: '-',
-      descendent: '__',
-      modifier: '--'
-    },
-    shortcuts: {
-      component: 'block',
-      descendent: 'elem',
-      modifier: 'mods'
+  parser: "sugarss",
+  plugins: {
+    'postcss-bem': {
+      defaultNamespace: undefined,
+      style: 'bem',
+      separators: {
+        namespace: '-',
+        descendent: '__',
+        modifier: '--'
+      },
+      shortcuts: {
+        component: 'block',
+        descendent: 'elem',
+        modifier: 'mods'
+      }
     }
   }
 }
 ```
-#### JSON
+#### postcssrc.json
 
 ```json
-{
+"parser": "sugarss",
+"plugins": {
   "bem": {
     "defaultNamespace": "undefined",
     "style": "bem",
@@ -98,9 +109,6 @@ module.exports = {
 ```
 
 ## Usage
-For general usage and build process integration see [PostCSS Docs](https://github.com/postcss/postcss#usage)
-
-### Examples using Node API
 #### Default
 
 ```js
@@ -109,16 +117,16 @@ For general usage and build process integration see [PostCSS Docs](https://githu
 const fs = require('fs')
 
 const postcss = require('postcss')
-const plugins = require('postcss-load-plugins')()
+const plugins = require('postcss-load-plugins')
 
-let css = fs.readFileSync('./index.css', 'utf-8')
+const css = fs.readFileSync('./index.css', 'utf-8')
 
-postcss(plugins)
+postcss(plugins())
   .process(css)
   .then(result => console.log(result.css))
 ```
 
-#### Options file (e.g postcss.json)
+#### Custom
 
 ```js
 'use strict'
@@ -126,11 +134,71 @@ postcss(plugins)
 const fs = require('fs')
 
 const postcss = require('postcss')
-const plugins = require('postcss-load-plugins')('postcss.(js|json)')
+const plugins = require('postcss-load-plugins')
 
-let css = fs.readFileSync('./index.css', 'utf-8')
+const css = fs.readFileSync('./index.css', 'utf-8')
 
-postcss(plugins)
+postcss(plugins('./postcssrc.json'))
   .process(css)
   .then(result => console.log(result.css))
 ```
+
+## LICENSE [![License MIT][license]][license-url]
+
+> License (MIT)
+
+> Copyright (c) 2016 Michael Ciniawsky
+
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+> The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+[npm]: https://img.shields.io/npm/v/postcss-load-plugins.svg
+[npm-url]: https://npmjs.com/package/postcss-load-plugins
+
+[node]: https://img.shields.io/node/v/gh-badges.svg?maxAge=2592000
+[node-url]: https://nodejs.org
+
+[deps]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins.svg
+[deps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins
+
+[devdeps]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins/dev-status.svg
+[devdeps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins#info=devDependencies
+
+[style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
+[style-url]: http://standardjs.com/
+
+[travis]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg
+[travis-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-plugins
+
+[travis-rel]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg?branch=release/1.0.0
+[travis-rel-url]:https://travis-ci.org/michael-ciniawsky/postcss-load-plugins?branch=release/1.0.0
+
+[travis-dev]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg?branch=develop
+[travis-dev-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-plugins?branch=develop
+
+[cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg?branch=master
+[cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=master
+
+[cover-rel]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg?branch=release/1.0.0
+[cover-rel-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=release/1.0.0
+
+[cover-dev]: https://coveralls.io/repos/github/michael-ciniawsk/postcss-load-plugins/badge.svg?branch=develop
+[cover-dev-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=develop
+
+[license]: https://img.shields.io/github/license/michael-ciniawsky/postcss-load-plugins.svg
+[license-url]: https://raw.githubusercontent.com/michael-ciniawsky/postcss-load-plugins/master/LICENSE
