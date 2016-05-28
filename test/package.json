@@ -1,22 +1,11 @@
 {
-  "name": "postcss-loads-plugins-example",
+  "name": "loads-plugins-test",
   "version": "0.1.0",
+  "private": true,
   "description": "Autoload Plugins for PostCSS",
-  "engines": {
-    "node": ">=4"
-  },
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "http:/github.com/michael-ciniawsky/postcss-load-plugins"
-  },
-  "author": {
-    "name": "Michael Ciniawky",
-    "email": "michael.ciniawsky@gmail.com"
-  },
-  "license": "MIT",
   "postcss": {
     "bem": {
       "defaultNamespace": "undefined",
