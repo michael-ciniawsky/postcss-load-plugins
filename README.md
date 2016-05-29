@@ -21,15 +21,15 @@ npm i -D postcss-loads-plugins
 
 ## Usage
 
+Need a Plugin? [PostCSS Plugins](https://postcss.parts)
+
 Plugins will load directly from your projects ***package.json*** file.
 Install them as usual with ``` npm i -S postcss-plugin``` or ``` npm i -D postcss-plugin ```.
 
-[PostCSS Plugins](https://postcss.parts)
-
 After installing your plugins there a two common ways to declare your plugin options.
 
-- Set plugins in your **package.json**.
-- Create a separated **postcss.config.js**  or  **postcssrc.json*** file
+- Create **postcss.plugins** section in your projects **package.json**.
+- Create a **postcss.config.js**  or  **postcssrc.json** file.
 
 ## Options
 
