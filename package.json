@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "postcss": "^5.0.16"
+    "cosmiconfig": "^1.1.0"
   },
   "devDependencies": {},
   "author": {

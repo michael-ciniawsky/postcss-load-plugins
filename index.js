@@ -4,87 +4,42 @@
 
 'use strict'
 
-const fs = require('fs')
 const path = require('path')
+const config = require('cosmiconfig')
 
-const postcss = require('postcss')
-
-exports = module.exports = function (plugins, options) {
-
-
-  if (typeof options === 'string') {
-    options = require(path.join(process.cwd(), options)) // ? `${}`
-  } else {
-    options = options || require(`${process.cwd() + '/package.json'}`).postcss || {}
-  }
-
-  var pkg = require(`${path.join(process.cwd(), '/package.json')}`)
-
-  function Processor (plugin, options) {
-    function namespace (plugin) {
-      let namespace = plugin
-        .slice(9)
-        .replace(/-(\w)/g, (match) => {
-          return match.replace(/-/, '').toUpperCase()
-        })
-      return `${namespace}`
+module.exports = function (options) {
+  function loadPlugins (config) {
+    if (typeof options === 'string') {
+      options = require(path.join(process.cwd(), options)).plugins
     }
 
-    return {
-      plugin: require(`${plugin}`),
-      namespace: namespace(plugin),
-      defaults: {}
+    if (typeof options === 'object') {
+      for (let option in options) {
+        config.plugins[option] = options[option]
+      }
     }
-  }
 
-  function isPlugin (element, index, array) {
-    return element.match(/postcss-[\w]/)
-  }
+    options = config.plugins
 
-  function isImport (element, index, array) {
-    return element.match(/postcss-[import]/)
-  }
+    function Plugin (plugin, options) {
+      if (options === null || options === undefined) {
+        return require(plugin)()
+      }
+      return require(plugin)(options)
+    }
 
-  function notImport (element, index, array) {
-    return element.match(/postcss-[^import]/)
-  }
+    let plugins = []
 
-  var processors = []
-
-  Object.keys(pkg.dependencies).filter(isPlugin).filter(isImport).forEach((plugin) => {
-    processors.unshift(new Processor(plugin))
-  })
-
-  Object.keys(pkg.dependencies).filter(isPlugin).filter(notImport).forEach((plugin) => {
-    processors.push(new Processor(plugin))
-  })
-
-  Object.keys(pkg.devDependencies).filter(isPlugin).filter(isImport).forEach((plugin) => {
-    processors.unshift(new Processor(plugin))
-  })
-
-  Object.keys(pkg.devDependencies).filter(isPlugin).filter(notImport).forEach((plugin) => {
-    processors.push(new Processor(plugin))
-  })
-
-  var instance = postcss()
-
-  processors.forEach((processor) => {
-    var namespaceOptions = processor.namespace in options ? options[processor.namespace] : options
-    var processorOptions = {}
-
-    Object.keys(processor.defaults).forEach((key) => {
-      processorOptions[key] = processor.defaults[key]
+    Object.keys(options).forEach((plugin) => {
+      console.log(plugin)
+      plugins.push(Plugin(plugin, options[plugin]))
     })
 
-    Object.keys(namespaceOptions).forEach((key) => {
-      processorOptions[key] = namespaceOptions[key]
-    })
+    return plugins
+  }
 
-    if (namespaceOptions && !processorOptions.disable) {
-      instance.use(processor.plugin(processorOptions))
-    }
-  })
-
-  return instance
+  return config('postcss')
+    .catch((error) => console.log(error))
+    .then((result) => loadPlugins(result.config))
+    .then((plugins) => console.log(plugins))
 }
