@@ -4,21 +4,36 @@
   "private": true,
   "description": "Autoload Plugins for PostCSS",
   "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "postcss": "^5.0.21",
+    "postcss-import": "^8.1.2",
+    "postcss-nested": "^1.0.0"
+  },
+  "devDependencies": {
+    "postcss-bem": "^0.4.1"
+  },
   "postcss": {
-    "bem": {
-      "defaultNamespace": "undefined",
-      "style": "bem",
-      "separators": {
-        "namespace": "-",
-        "descendent": "__",
-        "modifier": "--"
+    "parser": "sugarss",
+    "map": "inline",
+    "plugins": {
+      "postcss-import": {
+        "path": "./css/",
+        "encoding": "utf8"
       },
-      "shortcuts": {
-        "component": "block",
-        "descendent": "elem",
-        "modifier": "mods"
+      "postcss-nested": null,
+      "postcss-bem": {
+        "defaultNamespace": "undefined",
+        "style": "bem",
+        "separators": {
+          "namespace": "-",
+          "descendent": "__",
+          "modifier": "--"
+        },
+        "shortcuts": {
+          "component": "block",
+          "descendent": "elem",
+          "modifier": "mods"
+        }
       }
     }
   }
