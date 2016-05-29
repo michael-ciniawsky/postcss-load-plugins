@@ -19,7 +19,9 @@ module.exports = function (options) {
       }
     }
 
-    options = config.plugins
+    if (!options) {
+      options = config.plugins
+    }
 
     function Plugin (plugin, options) {
       if (options === null || options === undefined) {
@@ -31,7 +33,6 @@ module.exports = function (options) {
     let plugins = []
 
     Object.keys(options).forEach((plugin) => {
-      console.log(plugin)
       plugins.push(Plugin(plugin, options[plugin]))
     })
 
