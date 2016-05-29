@@ -3,7 +3,7 @@
 const fs = require('fs')
 
 const postcss = require('postcss')
-const plugins = require('../index')('./postcss.config.js')
+const plugins = require('../index')()
 
 const css = fs.readFileSync('./fixtures/index.css', 'utf8')
 
