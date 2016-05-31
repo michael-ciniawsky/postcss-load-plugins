@@ -19,8 +19,6 @@
 npm i -D postcss-loads-plugins
 ```
 
-## Usage
-
 [PostCSS Plugins](https://postcss.parts)
 
 Plugins will be loaded directly from your projects ***package.json*** file.
