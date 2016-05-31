@@ -1,10 +1,8 @@
 module.exports = {
-  parser: 'postcss-less',
-  map: 'inline',
   plugins: {
+    'postcss-import': null,
     'postcss-nested': null,
     'postcss-bem': {
-      defaultNamespace: 'undefined',
       style: 'bem',
       separators: {
         namespace: '-',

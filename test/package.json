@@ -7,22 +7,17 @@
   "dependencies": {
     "postcss": "^5.0.21",
     "postcss-import": "^8.1.2",
-    "postcss-nested": "^1.0.0"
+    "postcss-nested": "^1.0.0",
+    "sugarss": "^0.1.3"
   },
   "devDependencies": {
     "postcss-bem": "^0.4.1"
   },
   "postcss": {
-    "parser": "sugarss",
-    "map": "inline",
     "plugins": {
-      "postcss-import": {
-        "path": "./css/",
-        "encoding": "utf8"
-      },
+      "postcss-import": null,
       "postcss-nested": null,
       "postcss-bem": {
-        "defaultNamespace": "undefined",
         "style": "bem",
         "separators": {
           "namespace": "-",

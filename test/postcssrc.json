@@ -1,10 +1,8 @@
 {
-  "parser": "sugarss",
-  "map": "inline",
   "plugins": {
     "potscss-import": null,
+    "postcss-nested": null,
     "postcss-bem": {
-      "defaultNamespace": "undefined",
       "style": "bem",
       "separators": {
         "namespace": "-",

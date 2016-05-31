@@ -1,6 +1,4 @@
-@import "imports/section.css";
-
-@block index {
+@block section {
   @elem test {
     color: blue;
   }
@@ -10,7 +8,7 @@
   }
 }
 
-.index {
+.section {
   &-nested {
     color: goldenrod;
   }
