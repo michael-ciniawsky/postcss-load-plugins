@@ -4,7 +4,7 @@
 [![DevDependencies][devdeps]][devdeps-url]
 [![Standard Code Style][style]][style-url]
 
-# PostCSS Load Plugins
+# PostCSS Load Plugins <img align="right" width="108" height="108" title="PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
 
 ## Status
 
@@ -21,31 +21,66 @@ npm i -D postcss-loads-plugins
 
 ## Usage
 
-Need a Plugin? [PostCSS Plugins](https://postcss.parts)
+[PostCSS Plugins](https://postcss.parts)
 
-Plugins will load directly from your projects ***package.json*** file.
-Install them as usual with ``` npm i -S postcss-plugin``` or ``` npm i -D postcss-plugin ```.
+Plugins will be loaded directly from your projects ***package.json*** file.
 
-After installing your plugins there a two common ways to declare your plugin options.
+Install them as usual with as deps/devDeps.
+
+```
+npm i -S postcss-plugin
+```
+```
+npm i -D postcss-plugin
+```
+
+After installing your plugins there a two common ways to declare your plugins and options.
 
 - Create **postcss.plugins** section in your projects **package.json**.
 - Create a **postcss.config.js**  or  **postcssrc.json** file.
 
 ## Options
 
+Plugin **options** can either take ```null``` or an object ```{/* options */}```
+as value.
+
+```null``` : Load plugin with no options (plugin defaults).
+
+```[Object]``` : Load plugin with given options.
+
+## Ordering
+
+Plugin **order** will be determined by declaration in plugins section.
+
+```js
+plugins: {
+  'postcss-plugin1': null,
+  'postcss-plugin2': null,
+  'postcss-plugin3': {/* options */}
+}
+
+=> [
+    require('postcss-plugin1')(),
+    require('postcss-plugin2')(),
+    require('postcss-plugin3')(options)
+   ]
+```
+
+## Examples
 #### package.json
 
 ```json
 {
  "dependencies": {
    "postcss-bem": "^0.2.2",
+   "postcss-nested": "^1.0.0",
+   "postcss-import": "^8.1.2"
  },
- "devDependencies": {},
  "postcss": {
-   "parser": "sugarss",
    "plugins": {
+     "postcss-import": null,
+     "postcss-nested": null,
      "postcss-bem": {
-       "defaultNamespace": "undefined",
        "style": "bem",
        "separators": {
          "namespace": "-",
@@ -56,10 +91,10 @@ After installing your plugins there a two common ways to declare your plugin opt
          "component": "block",
          "descendent": "elem",
          "modifier": "mods"
-       }
-     }  
-   }
- }
+        }
+      }  
+    }
+  }
 }
 ```
 
@@ -67,10 +102,10 @@ After installing your plugins there a two common ways to declare your plugin opt
 
 ```js
 module.exports = {
-  parser: "sugarss",
   plugins: {
+    'postcss-import': null,
+    'postcss-nested': null,
     'postcss-bem': {
-      defaultNamespace: undefined,
       style: 'bem',
       separators: {
         namespace: '-',
@@ -89,20 +124,22 @@ module.exports = {
 #### postcssrc.json
 
 ```json
-"parser": "sugarss",
-"plugins": {
-  "bem": {
-    "defaultNamespace": "undefined",
-    "style": "bem",
-    "separators": {
-      "namespace": "-",
-      "descendent":"__",
-      "modifier": "--"
-    },
-    "shortcuts": {
-      "component": "block",
-      "descendent": "elem",
-      "modifier": "mods"
+{
+  "plugins": {
+    "postcss-import": null,
+    "postcss-nested": null,
+    "postcss-bem": {
+      "style": "bem",
+      "separators": {
+        "namespace": "-",
+        "descendent":"__",
+        "modifier": "--"
+      },
+      "shortcuts": {
+        "component": "block",
+        "descendent": "elem",
+        "modifier": "mods"
+      }
     }
   }
 }
@@ -117,13 +154,15 @@ module.exports = {
 const fs = require('fs')
 
 const postcss = require('postcss')
-const plugins = require('postcss-load-plugins')
+const pluginsrc = require('postcss-load-plugins')()
 
 const css = fs.readFileSync('./index.css', 'utf-8')
 
-postcss(plugins())
-  .process(css)
-  .then(result => console.log(result.css))
+pluginsrc.then((plugins) => {
+  postcss(plugins)
+    .process(css)
+    .then(result => console.log(result.css))
+}))
 ```
 
 #### Custom
@@ -134,13 +173,15 @@ postcss(plugins())
 const fs = require('fs')
 
 const postcss = require('postcss')
-const plugins = require('postcss-load-plugins')
+const pluginsrc = require('postcss-load-plugins')('./path/to/postcssrc.json')
 
 const css = fs.readFileSync('./index.css', 'utf-8')
 
-postcss(plugins('./postcssrc.json'))
-  .process(css)
-  .then(result => console.log(result.css))
+pluginsrc.then((plugins) => {
+  postcss(plugins)
+    .process(css)
+    .then(result => console.log(result.css))
+}))
 ```
 
 ## LICENSE [![License MIT][license]][license-url]
