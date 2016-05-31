@@ -1,5 +1,5 @@
 // ------------------------------------
-// #POSTCSS - LOAD OPTIONS - TEST
+// #POSTCSS - LOAD PlUGINS - TEST
 // ------------------------------------
 
 'use strict'
@@ -7,7 +7,7 @@
 const test = require('ava')
 
 const postcss = require('postcss')
-const pluginsrc = require('../index')()
+const pluginsrc = require('../index')
 
 const { readFileSync, writeFileSync } = require('fs')
 
@@ -20,7 +20,19 @@ function writeSync (path, file) {
 }
 
 test('Process CSS with default plugins', (t) => {
-  pluginsrc.then((plugins) => {
+  pluginsrc().then((plugins) => {
+    postcss(plugins)
+      .process(readSync('./fixtures/index.css'))
+      .then(result => {
+        writeSync('./expect/index.css', result.css)
+        t.equal(result.css, readSync('./expect/index.css'))
+        writeSync('./results/index.css', result.css)
+      })
+  })
+})
+
+test('Process CSS with custom plugins', (t) => {
+  pluginsrc('postcss.config.js').then((plugins) => {
     postcss(plugins)
       .process(readSync('./fixtures/index.css'))
       .then(result => {
@@ -32,13 +44,25 @@ test('Process CSS with default plugins', (t) => {
 })
 
 test('Process SSS with default plugins', (t) => {
-  pluginsrc.then((plugins) => {
+  pluginsrc().then((plugins) => {
     postcss(plugins)
       .process(readSync('./fixtures/index.sss'), {parser: require('sugarss')})
       .then(result => {
-        writeSync('./expect/index-sss.css', result.css)
-        t.equal(result.css, readSync('./expect/index.css'))
-        writeSync('./results/index-sss.css', result.css)
+        writeSync('./expect/index.sss.css', result.css)
+        t.equal(result.css, readSync('./expect/index.sss.css'))
+        writeSync('./results/index.sss.css', result.css)
+      })
+  })
+})
+
+test('Process SSS with custom plugins', (t) => {
+  pluginsrc('postcssrc.json').then((plugins) => {
+    postcss(plugins)
+      .process(readSync('./fixtures/index.sss'), {parser: require('sugarss')})
+      .then(result => {
+        writeSync('./expect/index.sss.css', result.css)
+        t.equal(result.css, readSync('./expect/index.sss.css'))
+        writeSync('./results/index.sss.css', result.css)
       })
   })
 })
