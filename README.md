@@ -1,25 +1,22 @@
 [![NPM][npm]][npm-url]
-[![Node][node]][node-url]
-[![Dependencies][deps]][deps-url]
-[![DevDependencies][devdeps]][devdeps-url]
+[![Deps][deps]][deps-url]
+[![Tests][travis]][travis-url]
+[![Coverage][cover]][cover-url]
 [![Standard Code Style][style]][style-url]
 
-# PostCSS Load Plugins <img align="right" width="108" height="108" title="PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
-
-## Status
-
-| Branch               | Build                     | Coverage                 |
-|:--------------------:|:-------------------------:|:------------------------:|
-|  Master              | ![travis]                 | ![cover]                 |
-|  Release/v1.0.0      | ![travis-rel]             | ![cover-rel]             |
+<div align="center">
+  <a href="https://github.com/postcss/postcss">
+    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
+  </a>
+  <h1>Load Plugins</h1>
+  <p>Autoload Plugins for PostCSS<p>
+</div>
 
 ## Install
 
 ```bash
-npm i -D postcss-loads-plugins
+npm i -D postcss-load-plugins
 ```
-
-[PostCSS Plugins](https://postcss.parts)
 
 Plugins will be loaded directly from your projects ***package.json*** file.
 
@@ -48,7 +45,7 @@ as value.
 
 ## Ordering
 
-Plugin **order** will be determined by declaration in plugins section.
+Plugin **order** will be determined by declaration in the plugins section.
 
 ```js
 plugins: {
@@ -57,7 +54,7 @@ plugins: {
   'postcss-plugin3': {/* options */}
 }
 
-=> [
+// [
     require('postcss-plugin1')(),
     require('postcss-plugin2')(),
     require('postcss-plugin3')(options)
@@ -182,7 +179,7 @@ pluginsrc.then((plugins) => {
 }))
 ```
 
-## LICENSE [![License MIT][license]][license-url]
+## LICENSE
 
 > License (MIT)
 
@@ -215,29 +212,11 @@ SOFTWARE.
 [deps]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins.svg
 [deps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins
 
-[devdeps]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins/dev-status.svg
-[devdeps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins#info=devDependencies
-
 [style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
 [style-url]: http://standardjs.com/
 
 [travis]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg
 [travis-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-plugins
 
-[travis-rel]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg?branch=release/1.0.0
-[travis-rel-url]:https://travis-ci.org/michael-ciniawsky/postcss-load-plugins?branch=release/1.0.0
-
-[travis-dev]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg?branch=develop
-[travis-dev-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-plugins?branch=develop
-
 [cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=master
-
-[cover-rel]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg?branch=release/1.0.0
-[cover-rel-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=release/1.0.0
-
-[cover-dev]: https://coveralls.io/repos/github/michael-ciniawsk/postcss-load-plugins/badge.svg?branch=develop
-[cover-dev-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=develop
-
-[license]: https://img.shields.io/github/license/michael-ciniawsky/postcss-load-plugins.svg
-[license-url]: https://raw.githubusercontent.com/michael-ciniawsky/postcss-load-plugins/master/LICENSE
