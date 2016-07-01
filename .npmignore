@@ -3,7 +3,7 @@
 .editorconfig
 npm-debug.log
 
-test.js
+*.test.js
 
 # DIRECTORIES
 
