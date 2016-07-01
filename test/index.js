@@ -6,63 +6,55 @@
 
 const test = require('ava')
 
-const postcss = require('postcss')
-const pluginsrc = require('../index')
-
+const { join } = require('path')
 const { readFileSync, writeFileSync } = require('fs')
 
-function readSync (path) {
-  return readFileSync(path, 'utf8')
-}
+const fixtures = (file) => readFileSync(join(__dirname, 'fixtures', file))
+const expected = (file) => readFileSync(join(__dirname, 'expects', file))
 
-function writeSync (path, file) {
-  return writeFileSync(path, file, 'utf8')
-}
+const postcss = require('postcss')
+const pluginsrc = require('../')
 
-test('Process CSS with default plugins', (t) => {
+test('1 - Process CSS with default plugins', (t) => {
   pluginsrc().then((plugins) => {
     postcss(plugins)
-      .process(readSync('./fixtures/index.css'))
+      .process(fixtures('index.css'))
       .then(result => {
-        writeSync('./expect/index.css', result.css)
-        t.equal(result.css, readSync('./expect/index.css'))
-        writeSync('./results/index.css', result.css)
+        writeFileSync('./expects/index.css', result.css)
+        t.is(expected('index.css'), result.css)
       })
   })
 })
 
-test('Process CSS with custom plugins', (t) => {
+test('2 - Process CSS with custom plugins', (t) => {
   pluginsrc('postcss.config.js').then((plugins) => {
     postcss(plugins)
-      .process(readSync('./fixtures/index.css'))
-      .then(result => {
-        writeSync('./expect/index.css', result.css)
-        t.equal(result.css, readSync('./expect/index.css'))
-        writeSync('./results/index.css', result.css)
+      .process(fixtures('index.css'))
+      .then((result) => {
+        writeFileSync('./expects/index.css', result.css)
+        t.is(expected('index.css'), result.css)
       })
   })
 })
 
-test('Process SSS with default plugins', (t) => {
+test('3 - Process SSS with default plugins', (t) => {
   pluginsrc().then((plugins) => {
     postcss(plugins)
-      .process(readSync('./fixtures/index.sss'), {parser: require('sugarss')})
+      .process(fixtures('index.sss'), {parser: require('sugarss')})
       .then(result => {
-        writeSync('./expect/index.sss.css', result.css)
-        t.equal(result.css, readSync('./expect/index.sss.css'))
-        writeSync('./results/index.sss.css', result.css)
+        writeFileSync('./expects/index.sss.css', result.css)
+        t.is(expected('index.sss.css'), result.css)
       })
   })
 })
 
-test('Process SSS with custom plugins', (t) => {
+test('4 - Process SSS with custom plugins', (t) => {
   pluginsrc('postcssrc.json').then((plugins) => {
     postcss(plugins)
-      .process(readSync('./fixtures/index.sss'), {parser: require('sugarss')})
+      .process(fixtures('index.sss'), {parser: require('sugarss')})
       .then(result => {
-        writeSync('./expect/index.sss.css', result.css)
-        t.equal(result.css, readSync('./expect/index.sss.css'))
-        writeSync('./results/index.sss.css', result.css)
+        writeFileSync('./expects/index.sss.css', result.css)
+        t.is(expected('index.sss.css'), result.css)
       })
   })
 })

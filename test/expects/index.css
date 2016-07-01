@@ -1,0 +1,18 @@
+@import "css/section.css";
+
+.index{}
+
+.index__test{
+
+    color: blue;
+}
+
+.index--test{
+
+    color: red;
+}
+
+.index-nested {
+
+    color: goldenrod;
+}
