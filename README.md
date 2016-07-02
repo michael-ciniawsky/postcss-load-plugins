@@ -18,47 +18,49 @@
 npm i -D postcss-load-plugins
 ```
 
-Plugins will be loaded directly from your projects ***package.json*** file.
-
-Install them as usual with as deps/devDeps.
+## Usage
+Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
 
 ```
 npm i -S postcss-plugin
-```
-```
 npm i -D postcss-plugin
 ```
 
 After installing your plugins there a two common ways to declare your plugins and options.
 
-- Create **postcss.plugins** section in your projects **package.json**.
+- Create **postcss** section in your projects **package.json**.
 - Create a **postcss.config.js**  or  **postcssrc.json** file.
 
 ## Options
 
-Plugin **options** can either take ```null``` or an object ```{/* options */}```
+Plugin **options** can either take ```null``` or an object literal ```{}```
 as value.
 
-```null``` : Load plugin with no options (plugin defaults).
+```null``` : Plugin loads with no options (defaults).
 
-```[Object]``` : Load plugin with given options.
+```[Object]``` : Plugin loads with set options.
 
 ## Ordering
 
-Plugin **order** will be determined by declaration in the plugins section.
+Plugin **order** is determined by declaration in the plugins section.
 
 ```js
-plugins: {
-  'postcss-plugin1': null,
-  'postcss-plugin2': null,
-  'postcss-plugin3': {/* options */}
+
+postcss: {
+  plugins: {
+    'postcss-plugin1': null,
+    'postcss-plugin2': null,
+    'postcss-plugin3': {option1: '', option2: ''}
+  }
 }
 
-// [
-    require('postcss-plugin1')(),
-    require('postcss-plugin2')(),
-    require('postcss-plugin3')(options)
-   ]
+// Loaded Plugin Setup
+
+[
+  require('postcss-plugin1')(),
+  require('postcss-plugin2')(),
+  require('postcss-plugin3')(options)
+]
 ```
 
 ## Examples
@@ -146,12 +148,12 @@ module.exports = {
 ```js
 'use strict'
 
-const fs = require('fs')
+const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
 const pluginsrc = require('postcss-load-plugins')()
 
-const css = fs.readFileSync('./index.css', 'utf-8')
+const css = readFileSync('./index.css', 'utf8')
 
 pluginsrc.then((plugins) => {
   postcss(plugins)
@@ -165,12 +167,12 @@ pluginsrc.then((plugins) => {
 ```js
 'use strict'
 
-const fs = require('fs')
+const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
 const pluginsrc = require('postcss-load-plugins')('./path/to/postcssrc.json')
 
-const css = fs.readFileSync('./index.css', 'utf-8')
+const css = fs.readFileSync('./index.css', 'utf8')
 
 pluginsrc.then((plugins) => {
   postcss(plugins)
@@ -205,9 +207,6 @@ SOFTWARE.
 
 [npm]: https://img.shields.io/npm/v/postcss-load-plugins.svg
 [npm-url]: https://npmjs.com/package/postcss-load-plugins
-
-[node]: https://img.shields.io/node/v/gh-badges.svg?maxAge=2592000
-[node-url]: https://nodejs.org
 
 [deps]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins.svg
 [deps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins
