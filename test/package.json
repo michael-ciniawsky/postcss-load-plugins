@@ -1,8 +1,8 @@
 {
   "name": "loads-plugins-test",
-  "version": "0.1.0",
   "private": true,
-  "description": "Autoload Plugins for PostCSS",
+  "version": "1.0.0",
+  "description": "Load Plugins for PostCSS",
   "main": "index.js",
   "dependencies": {
     "postcss": "^5.0.21",
@@ -15,21 +15,9 @@
   },
   "postcss": {
     "plugins": {
-      "postcss-import": null,
-      "postcss-nested": null,
-      "postcss-bem": {
-        "style": "bem",
-        "separators": {
-          "namespace": "-",
-          "descendent": "__",
-          "modifier": "--"
-        },
-        "shortcuts": {
-          "component": "block",
-          "descendent": "elem",
-          "modifier": "mods"
-        }
-      }
+      "postcss-import": false,
+      "postcss-nested": false,
+      "postcss-bem": false
     }
   }
 }

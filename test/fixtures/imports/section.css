@@ -1,11 +1,13 @@
-@block section {
-  @elem test {
+.section {
+
+  &___test {
     color: blue;
   }
 
-  @mods test {
+  &--test {
     color: red;
   }
+
 }
 
 .section {

@@ -1,17 +1,13 @@
 @import "imports/section.css";
 
-@block index {
-  @elem test {
+.index {
+
+  &__test {
     color: blue;
   }
 
-  @mods test {
+  &--test {
     color: red;
   }
-}
 
-.index {
-  &-nested {
-    color: goldenrod;
-  }
 }

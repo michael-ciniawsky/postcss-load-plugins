@@ -1,7 +1,7 @@
 {
   "plugins": {
-    "potscss-import": null,
-    "postcss-nested": null,
+    "potscss-import": false,
+    "postcss-nested": false,
     "postcss-bem": {
       "style": "bem",
       "separators": {
