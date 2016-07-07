@@ -7,7 +7,7 @@
 var test = require('ava')
 
 var fs = require('fs')
-var path= require('path')
+var path = require('path')
 
 function fixtures (file) {
   return fs.readFileSync(path.join(__dirname, 'fixtures', file))
