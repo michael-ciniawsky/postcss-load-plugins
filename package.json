@@ -1,6 +1,6 @@
 {
   "name": "postcss-load-plugins",
-  "version": "2.0.0-alpha2",
+  "version": "2.0.0-alpha3",
   "description": "Autoload Plugins for PostCSS",
   "engines": {"node": ">=4"},
   "main": "index.js",
