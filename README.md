@@ -12,13 +12,14 @@
   <p>Autoload Plugins for PostCSS<p>
 </div>
 
-## Install
+<h2 align="center">Install</h2>
 
 ```bash
 npm i -D postcss-load-plugins
 ```
 
-## Usage
+<h2 align="center">Usage</h2>
+
 Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
 
 ```
@@ -33,24 +34,23 @@ After installing your plugins there a two common ways to declare your plugins an
 
 ## Options
 
-Plugin **options** can either take ```null``` or an object literal ```{}```
-as value.
+Plugin **options** can either take ``` false ```  or an object literal
+``` {} ``` as value.
 
-```null``` : Plugin loads with no options (defaults).
+``` false ``` : Plugin loads with no options (defaults)
 
-```[Object]``` : Plugin loads with set options.
+``` [Object] ``` : Plugin loads with set options.
 
-## Ordering
+## Order
 
 Plugin **order** is determined by declaration in the plugins section.
 
 ```js
-
 postcss: {
   plugins: {
-    'postcss-plugin1': null,
-    'postcss-plugin2': null,
-    'postcss-plugin3': {option1: '', option2: ''}
+    'postcss-plugin1': false,
+    'postcss-plugin2': false,
+    'postcss-plugin3': {}
   }
 }
 
@@ -63,8 +63,9 @@ postcss: {
 ]
 ```
 
-## Examples
-#### package.json
+<h2 align="center">Examples</h2>
+
+### package.json
 
 ```json
 {
@@ -75,44 +76,34 @@ postcss: {
  },
  "postcss": {
    "plugins": {
-     "postcss-import": null,
-     "postcss-nested": null,
+     "postcss-import": false,
+     "postcss-nested": false,
      "postcss-bem": {
        "style": "bem",
        "separators": {
          "namespace": "-",
          "descendent":"__",
          "modifier": "--"
-       },
-       "shortcuts": {
-         "component": "block",
-         "descendent": "elem",
-         "modifier": "mods"
-        }
+       }
       }  
     }
   }
 }
 ```
 
-#### postcss.config.js
+### postcss.config.js
 
 ```js
 module.exports = {
   plugins: {
-    'postcss-import': null,
-    'postcss-nested': null,
+    'postcss-import': false,
+    'postcss-nested': false,
     'postcss-bem': {
       style: 'bem',
       separators: {
         namespace: '-',
         descendent: '__',
         modifier: '--'
-      },
-      shortcuts: {
-        component: 'block',
-        descendent: 'elem',
-        modifier: 'mods'
       }
     }
   }
@@ -123,31 +114,21 @@ module.exports = {
 ```json
 {
   "plugins": {
-    "postcss-import": null,
-    "postcss-nested": null,
+    "postcss-import": false,
+    "postcss-nested": false,
     "postcss-bem": {
       "style": "bem",
       "separators": {
         "namespace": "-",
         "descendent":"__",
         "modifier": "--"
-      },
-      "shortcuts": {
-        "component": "block",
-        "descendent": "elem",
-        "modifier": "mods"
       }
     }
   }
 }
 ```
 
-## Usage
-#### Default
-
 ```js
-'use strict'
-
 const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
@@ -162,30 +143,11 @@ pluginsrc.then((plugins) => {
 }))
 ```
 
-#### Custom
-
-```js
-'use strict'
-
-const { readFileSync } = require('fs')
-
-const postcss = require('postcss')
-const pluginsrc = require('postcss-load-plugins')('./path/to/postcssrc.json')
-
-const css = fs.readFileSync('./index.css', 'utf8')
-
-pluginsrc.then((plugins) => {
-  postcss(plugins)
-    .process(css)
-    .then(result => console.log(result.css))
-}))
-```
-
-## LICENSE
+<h2 align="center">LICENSE</h2>
 
 > License (MIT)
 
-> Copyright (c) 2016 Michael Ciniawsky
+> Copyright (c) 2016 Michael Ciniawsky <michael.ciniawsky@gmail.com>
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
