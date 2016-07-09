@@ -2,7 +2,9 @@
   "name": "postcss-load-plugins",
   "version": "2.0.0-alpha4",
   "description": "Autoload Plugins for PostCSS",
-  "engines": {"node": ">=4"},
+  "engines": {
+    "node": ">=4"
+  },
   "main": "index.js",
   "scripts": {
     "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
@@ -21,7 +23,7 @@
     "sugarss": "^0.1.3",
     "ava": "^0.15.2",
     "coveralls": "^2.11.9",
-    "nyc": "^6.6.1",
+    "nyc": "^7.0.0",
     "standard": "^7.1.2"
   },
   "ava": {
@@ -29,8 +31,13 @@
   },
   "nyc": {
     "all": true,
-    "include": ["lib", "test"],
-    "extension": [".js"]
+    "include": [
+      "lib",
+      "test"
+    ],
+    "extension": [
+      ".js"
+    ]
   },
   "keywords": [
     "postcss",
