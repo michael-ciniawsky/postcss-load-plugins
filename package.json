@@ -16,7 +16,7 @@
     "cosmiconfig": "^1.1.0"
   },
   "devDependencies": {
-    "postcss": "^5.0.21",
+    "postcss": "^5.1.1",
     "postcss-bem": "^0.4.1",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
