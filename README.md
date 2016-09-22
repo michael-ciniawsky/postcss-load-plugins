@@ -1,10 +1,12 @@
-[![NPM][npm]][npm-url]
-[![Deps][deps]][deps-url]
-[![Tests][travis]][travis-url]
-[![Coverage][cover]][cover-url]
-[![Standard Code Style][style]][style-url]
+[![npm][npm]][npm-url]
+[![deps][deps]][deps-url]
+[![tests][travis]][travis-url]
+[![coverage][cover]][cover-url]
+[![code style][style]][style-url]
+[![chat][chat]][chat-url]
 
 <div align="center">
+  <img width="200" height="200" title="PostCSS Plugins" src="https://d13yacurqjgara.cloudfront.net/users/54729/screenshots/1048784/plugin-icon.png">
   <a href="https://github.com/postcss/postcss">
     <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
   </a>
@@ -23,8 +25,7 @@ npm i -D postcss-load-plugins
 Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
 
 ```
-npm i -S postcss-plugin
-npm i -D postcss-plugin
+npm i -S|-D postcss-plugin
 ```
 
 After installing your plugins there a two common ways to declare your plugins and options.
@@ -32,16 +33,16 @@ After installing your plugins there a two common ways to declare your plugins an
 - Create **postcss** section in your projects **package.json**.
 - Create a **postcss.config.js**  or  **postcssrc.json** file.
 
-## Options
+<h2 align="center">Options</h2>
 
-Plugin **options** can either take ``` false ```  or an object literal
-``` {} ``` as value.
+Plugin **options** can either take `false`  or an object literal
+`{}` as value.
 
-``` false ``` : Plugin loads with no options (defaults)
+**`false`**: Plugin loads with no options (defaults)
 
-``` [Object] ``` : Plugin loads with set options.
+**`[Object]`**: Plugin loads with set options.
 
-## Order
+### Order
 
 Plugin **order** is determined by declaration in the plugins section.
 
@@ -55,15 +56,12 @@ postcss: {
 }
 
 // Loaded Plugin Setup
-
 [
   require('postcss-plugin1')(),
   require('postcss-plugin2')(),
   require('postcss-plugin3')(options)
 ]
 ```
-
-<h2 align="center">Examples</h2>
 
 ### package.json
 
@@ -78,14 +76,7 @@ postcss: {
    "plugins": {
      "postcss-import": false,
      "postcss-nested": false,
-     "postcss-bem": {
-       "style": "bem",
-       "separators": {
-         "namespace": "-",
-         "descendent":"__",
-         "modifier": "--"
-       }
-      }  
+     "postcss-bem": { "style": "bem" }
     }
   }
 }
@@ -98,35 +89,22 @@ module.exports = {
   plugins: {
     'postcss-import': false,
     'postcss-nested': false,
-    'postcss-bem': {
-      style: 'bem',
-      separators: {
-        namespace: '-',
-        descendent: '__',
-        modifier: '--'
-      }
-    }
+    'postcss-bem': { style: 'bem' }
   }
 }
 ```
-#### postcssrc.json
+### postcssrc.json
 
 ```json
 {
   "plugins": {
     "postcss-import": false,
     "postcss-nested": false,
-    "postcss-bem": {
-      "style": "bem",
-      "separators": {
-        "namespace": "-",
-        "descendent":"__",
-        "modifier": "--"
-      }
-    }
+    "postcss-bem": { "style": "bem" }
   }
 }
 ```
+<h2 align="center">Example</h2>
 
 ```js
 const { readFileSync } = require('fs')
@@ -143,9 +121,24 @@ pluginsrc.then((plugins) => {
 }))
 ```
 
+<h2 align="center">Maintainers</h2>
+
+<table>
+  <tbody>
+   <tr>
+    <td align="center">
+      <img width="150 height="150"
+      src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
+      <br />
+      <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
+    </td>
+  </tr>
+  <tbody>
+</table>
+
 <h2 align="center">LICENSE</h2>
 
-> License (MIT)
+> (MIT)
 
 > Copyright (c) 2016 Michael Ciniawsky <michael.ciniawsky@gmail.com>
 
@@ -181,3 +174,6 @@ SOFTWARE.
 
 [cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=master
+
+[chat]: https://img.shields.io/gitter/room/postcss/postcss.svg?maxAge=2592000
+[chat-url]: https://gitter.im/postcss/postcss
