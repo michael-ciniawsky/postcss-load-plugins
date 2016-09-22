@@ -30,8 +30,13 @@
   },
   "nyc": {
     "all": true,
-    "include": ["lib", "test"],
-    "extension": [".js"]
+    "include": [
+      "lib",
+      "test"
+    ],
+    "extension": [
+      ".js"
+    ]
   },
   "keywords": [
     "postcss",
