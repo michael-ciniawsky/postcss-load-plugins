@@ -6,9 +6,9 @@
 [![chat][chat]][chat-url]
 
 <div align="center">
-  <img width="200" height="200" title="PostCSS Plugins" src="https://d13yacurqjgara.cloudfront.net/users/54729/screenshots/1048784/plugin-icon.png">
+  <img width="180" height="180" title="PostCSS Plugins" src="https://d13yacurqjgara.cloudfront.net/users/54729/screenshots/1048784/plugin-icon.png">
   <a href="https://github.com/postcss/postcss">
-    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
+    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" vspace="40">
   </a>
   <h1>Load Plugins</h1>
   <p>Autoload Plugins for PostCSS<p>
@@ -125,15 +125,15 @@ pluginsrc.then((plugins) => {
 
 <table>
   <tbody>
-   <tr>
-    <td align="center">
-      <img width="150 height="150"
-      src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
-      <br />
-      <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
-    </td>
-  </tr>
-  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150 height="150"
+        src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
+        <br />
+        <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <h2 align="center">LICENSE</h2>
