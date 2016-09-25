@@ -1,18 +1,21 @@
-@import "css/section.css";
+@import "imports/section.css";
 
-.index{}
+.ComponentName{
 
-.index__test{
-
-    color: blue;
+    color: cyan
 }
 
-.index--test{
+.ComponentName.is-stateName{
 
-    color: red;
+    color: crimson
 }
 
-.index-nested {
+.ComponentName--modifierName{
 
-    color: goldenrod;
+    color: yellow
+}
+
+.ComponentName-descendentName{
+
+    color: navy
 }

@@ -1,0 +1,21 @@
+@import "imports/section.css";
+
+.ComponentName{
+
+    color: cyan;
+
+    @when stateName{
+
+        color: crimson;
+    }
+}
+
+.ComponentName--modifierName{
+
+    color: yellow;
+}
+
+.ComponentName__descendentName{
+
+    color: navy;
+}
