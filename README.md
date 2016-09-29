@@ -6,7 +6,7 @@
 [![chat][chat]][chat-url]
 
 <div align="center">
-  <img width="108" height="108" title="PostCSS Plugins" src="logo.svg">
+  <img width="108" height="108" title="Load Plugins" src="http://michael-ciniawsky.github.io/postcss-load-plugins/logo.svg">
   <a href="https://github.com/postcss/postcss">
     <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
   </a>
