@@ -1,0 +1,11 @@
+@import "imports/section.css";
+
+.index__test {
+
+    color: blue;
+}
+
+.index--test {
+
+    color: red;
+}
