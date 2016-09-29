@@ -1,13 +1,17 @@
-@import "imports/section.sss";;
+@import "imports/section.sss";
 
-.index {
-  color: blue;
+.ComponentName {
+  color: cyan;
 }
 
-.index__red {
-  color: red;
+.ComponentName.is-stateName {
+  color: crimson;
 }
 
-.index__goldenrod {
-  color: goldenrod;
+.ComponentName--modifierName {
+  color: yellow;
+}
+
+.ComponentName-descendentName {
+  color: navy;
 }

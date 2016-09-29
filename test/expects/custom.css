@@ -1,11 +1,17 @@
 @import "imports/section.css";
 
-.index__test {
+.ComponentName{
+  color: cyan;
 
-    color: blue;
+  @when stateName{
+    color: crimson;
+  }
 }
 
-.index--test {
+.ComponentName--modifierName{
+  color: yellow;
+}
 
-    color: red;
+.ComponentName__descendentName{
+  color: navy;
 }

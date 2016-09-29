@@ -1,7 +1,7 @@
 module.exports = {
   plugins: {
-    'postcss-import': false,
-    'postcss-nested': false,
+    'postcss-import': null,
+    'postcss-nested': null,
     'postcss-bem': {
       style: 'bem',
       separators: {

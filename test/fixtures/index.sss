@@ -1,10 +1,13 @@
 @import "imports/section.sss";
 
-.index
-  color: blue;
+@component ComponentName
+  color: cyan;
 
-.index__red
-  color: red;
+  @modifier modifierName
+    color: yellow;
 
-.index__goldenrod
-  color: goldenrod;
+  @descendent descendentName
+    color: navy;
+
+  @when stateName
+    color: crimson;
