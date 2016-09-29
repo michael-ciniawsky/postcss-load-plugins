@@ -6,9 +6,9 @@
 [![chat][chat]][chat-url]
 
 <div align="center">
-  <img width="180" height="180" title="PostCSS Plugins" src="https://d13yacurqjgara.cloudfront.net/users/54729/screenshots/1048784/plugin-icon.png">
+  <img width="108" height="108" title="PostCSS Plugins" src="logo.svg">
   <a href="https://github.com/postcss/postcss">
-    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" vspace="40">
+    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
   </a>
   <h1>Load Plugins</h1>
   <p>Autoload Plugins for PostCSS<p>
@@ -131,6 +131,12 @@ pluginsrc.then((plugins) => {
         src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
         <br />
         <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
+      </td>
+      <td align="center">
+        <img width="150 height="150"
+        src="https://avatars.githubusercontent.com/u/2437969?v=3&s=150">
+        <br />
+        <a href="https://github.com/ertrzyiks">Mateusz Derks</a>
       </td>
     </tr>
   </tbody>
