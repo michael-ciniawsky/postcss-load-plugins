@@ -23,7 +23,7 @@
     "ava": "^0.16.0",
     "coveralls": "^2.11.13",
     "nyc": "^8.3.0",
-    "standard": "^8.1.0"
+    "standard": "^8.3.0"
   },
   "ava": {
     "verbose": "true"
