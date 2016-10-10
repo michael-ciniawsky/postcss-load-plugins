@@ -6,74 +6,65 @@
 
 var test = require('ava')
 
-var fs = require('fs')
-var path = require('path')
+const join = require('path').join
+const read = require('fs').readFileSync
 
-function fixtures (file) {
-  return fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
-}
+const fixture = (file) => read(join(__dirname, 'fixtures', file), 'utf8')
+const expect = (file) => read(join(__dirname, 'expect', file), 'utf8')
 
-function expected (file) {
-  return fs.readFileSync(path.join(__dirname, 'expects', file), 'utf8')
-}
+const postcss = require('postcss')
+const pluginsrc = require('..')
 
-var postcss = require('postcss')
-var pluginsrc = require('..')
+let options = { from: 'fixtures/index.css', to: 'expect/index.css' }
 
-test('1 - Load with default plugins ', function (t) {
-  return pluginsrc().then(function (plugins) {
+test('Load Plugins (development)', (t) => {
+  process.env.NODE_ENV = 'development'
+
+  return pluginsrc().then((plugins) => {
+    t.is(plugins.length, 2)
+
+    t.is(plugins[0], require('postcss-import'))
+    t.is(plugins[1], require('postcss-nested'))
+  })
+})
+
+test('Load Plugins (production)', (t) => {
+  process.env.NODE_ENV = 'production'
+
+  return pluginsrc().then((plugins) => {
     t.is(plugins.length, 3)
-    t.is(plugins[0].postcssPlugin, 'postcss-import')
-    t.is(plugins[1].postcssPlugin, 'postcss-nested')
-    t.is(plugins[2].postcssPlugin, 'postcss-bem')
+
+    t.is(plugins[0], require('postcss-import'))
+    t.is(plugins[1], require('postcss-nested'))
+    t.is(plugins[2], require('cssnano'))
   })
 })
 
-test('2 - Load with custom plugins ', function (t) {
-  return pluginsrc('postcss.config.js').then(function (plugins) {
-    t.is(plugins.length, 3)
-    t.is(plugins[0].postcssPlugin, 'postcss-import')
-    t.is(plugins[1].postcssPlugin, 'postcss-nested')
-    t.is(plugins[2].postcssPlugin, 'postcss-bem')
-  })
-})
+test('Process CSS', (t) => {
+  process.env.NODE_ENV = 'development'
 
-test('3 - Process CSS with default plugins', function (t) {
-  return pluginsrc().then(function (plugins) {
+  return pluginsrc().then((plugins) => {
     return postcss(plugins)
-      .process(fixtures('index.css'))
-      .then(function (result) {
-        t.is(expected('index.css'), result.css)
+      .process(fixture('index.css'), options)
+      .then((result) => {
+        t.is(expect('index.css'), result.css)
       })
   })
 })
 
-test('4 - Process SSS with custom plugins', (t) => {
-  return pluginsrc('postcss.config.js').then((plugins) => {
-    return postcss(plugins)
-      .process(fixtures('index.css'))
-      .then(function (result) {
-        t.is(expected('custom.css'), result.css)
-      })
-  })
-})
+test('Process SSS', (t) => {
+  process.env.NODE_ENV = 'development'
 
-test('5 - Process SSS with default plugins', function (t) {
-  return pluginsrc().then(function (plugins) {
-    return postcss(plugins)
-      .process(fixtures('index.sss'), {parser: require('sugarss')})
-      .then(function (result) {
-        t.is(expected('index.sss.css'), result.css)
-      })
-  })
-})
+  return pluginsrc().then((plugins) => {
+    options = Object.assign(options, {
+      parser: require('sugarss'),
+      from: 'fixtures/index.sss'
+    })
 
-test('6 - Process SSS with custom plugins', function (t) {
-  return pluginsrc('postcssrc.json').then(function (plugins) {
     return postcss(plugins)
-      .process(fixtures('index.sss'), {parser: require('sugarss')})
-      .then(function (result) {
-        t.is(expected('custom.sss.css'), result.css)
+      .process(fixture('index.sss'), options)
+      .then((result) => {
+        t.is(expect('index.sss'), result.css)
       })
   })
 })

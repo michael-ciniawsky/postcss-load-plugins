@@ -1,17 +1,17 @@
-@import "imports/section.css";
+@import 'imports/section.css';
 
-@component ComponentName {
+.test {
   color: cyan;
 
-  @modifier modifierName {
+  &__yellow {
     color: yellow;
   }
 
-  @descendent descendentName {
+  &__navy {
     color: navy;
   }
 
-  @when stateName {
+  &__crimson {
     color: crimson;
   }
 }

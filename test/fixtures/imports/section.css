@@ -1,17 +1,3 @@
 .section {
-
-  &___test {
-    color: blue;
-  }
-
-  &--test {
-    color: red;
-  }
-
-}
-
-.section {
-  &-nested {
-    color: goldenrod;
-  }
+  color: goldenrod;
 }
