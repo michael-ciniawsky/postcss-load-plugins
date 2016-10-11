@@ -1,14 +1,15 @@
 [![npm][npm]][npm-url]
+[![node][node]][node-url]
 [![deps][deps]][deps-url]
-[![tests][travis]][travis-url]
+[![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![code style][style]][style-url]
 [![chat][chat]][chat-url]
 
 <div align="center">
-  <img width="108" height="108" title="Load Plugins" src="http://michael-ciniawsky.github.io/postcss-load-plugins/logo.svg">
+  <img width="100" height="100" title="Load Plugins" src="http://michael-ciniawsky.github.io/postcss-load-plugins/logo.svg">
   <a href="https://github.com/postcss/postcss">
-    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
+    <img width="110" height="110" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="10">
   </a>
   <h1>Load Plugins</h1>
   <p>Autoload Plugins for PostCSS<p>
@@ -22,102 +23,154 @@ npm i -D postcss-load-plugins
 
 <h2 align="center">Usage</h2>
 
-Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
-
 ```
 npm i -S|-D postcss-plugin
 ```
 
-After installing your plugins there a two common ways to declare your plugins and options.
+Install plugins and save them to your ***package.json*** dependencies/devDependencies.
 
-- Create **postcss** section in your projects **package.json**.
-- Create a **postcss.config.js**  or  **postcssrc.json** file.
+### `package.json`
+
+Create **`postcss`** section in your projects **`package.json`**
+
+```
+App
+  |– client
+  |– public
+  |
+  |- package.json
+```
+
+```json
+{
+  "postcss": {
+    "plugins": {
+      "postcss-plugin": {}
+    }
+  }
+}
+```
+
+### `.postcssrc`
+
+Create **`.postcssrc`** file
+
+```
+App
+  |– client
+  |– public
+  |
+  |-.postcssrc
+  |- package.json
+```
+
+```json
+{
+  "plugins": {
+    "postcss-plugin": {}
+  }
+}
+```
+
+### `postcss.config.js`
+
+Create a **`postcss.config.js`** file.
+
+```
+App
+  |– client
+  |– public
+  |
+  |- postcss.config.js
+  |- package.json
+```
+
+```js
+module.exports = (ctx) => {
+  plugins: {
+    'postcss-plugin': options
+  }
+}
+```
+
+```js
+module.exports = (ctx) => {
+  plugins: [
+    require('postcss-plugin')(ctx.plugin)
+  ]
+}
+```
 
 <h2 align="center">Options</h2>
 
-Plugin **options** can either take `false`  or an object literal
-`{}` as value.
+Plugin **options** can take the following values.
 
-**`false`**: Plugin loads with no options (defaults)
+**`null`**: Plugin loads with defaults.
 
-**`[Object]`**: Plugin loads with set options.
+```js
+'postcss-plugin': null
+```
+
+**`[Object]`**: Plugin loads with given options.
+
+```js
+'postcss-plugin': { option: '', option: '' }
+```
+
+**`false`**: Plugin will not be loaded.
+
+```js
+'postcss-plugin': false
+```
 
 ### Order
 
 Plugin **order** is determined by declaration in the plugins section.
 
 ```js
-postcss: {
-  plugins: {
-    'postcss-plugin1': false,
-    'postcss-plugin2': false,
-    'postcss-plugin3': {}
-  }
-}
-
-// Loaded Plugin Setup
-[
-  require('postcss-plugin1')(),
-  require('postcss-plugin2')(),
-  require('postcss-plugin3')(options)
-]
-```
-
-### package.json
-
-```json
 {
- "dependencies": {
-   "postcss-bem": "^0.2.2",
-   "postcss-nested": "^1.0.0",
-   "postcss-import": "^8.1.2"
- },
- "postcss": {
-   "plugins": {
-     "postcss-import": false,
-     "postcss-nested": false,
-     "postcss-bem": { "style": "bem" }
-    }
+  plugins: {
+    'postcss-plugin': false, // plugins[0]
+    'postcss-plugin': false, // plugins[1]
+    'postcss-plugin': {}     // plugins[2]
   }
 }
 ```
 
-### postcss.config.js
+### Context
+
+When using a function `(postcss.config.js)`, it is possible to pass context to `postcss-load-plugins`, which will be evaluated before loading your plugins. By default `ctx.env (process.env.NODE_ENV)` and `ctx.cwd (process.cwd())` are available.
+
+<h2 align="center">Examples</h2>
+
+**postcss.config.js**
 
 ```js
-module.exports = {
+module.exports = (ctx) => {
   plugins: {
-    'postcss-import': false,
-    'postcss-nested': false,
-    'postcss-bem': { style: 'bem' }
+    postcss-import: null,
+    postcss-bem: ctx.bem || null,
+    cssnano: ctx.env === 'development' ? false : null
   }
 }
 ```
-### postcssrc.json
 
-```json
-{
-  "plugins": {
-    "postcss-import": false,
-    "postcss-nested": false,
-    "postcss-bem": { "style": "bem" }
-  }
-}
-```
-<h2 align="center">Example</h2>
+### <img width="80" height="80" src="https://worldvectorlogo.com/logos/nodejs-icon.svg"> API
 
 ```js
 const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
-const pluginsrc = require('postcss-load-plugins')()
+const pluginsrc = require('postcss-load-plugins')
 
-const css = readFileSync('./index.css', 'utf8')
+const css = readFileSync('index.css', 'utf8')
 
-pluginsrc.then((plugins) => {
+const ctx = { bem: { style: 'bem' } }
+
+pluginsrc(ctx).then((plugins) => {
   postcss(plugins)
     .process(css)
-    .then(result => console.log(result.css))
+    .then(({ css }) => console.log(css))
 }))
 ```
 
@@ -142,44 +195,24 @@ pluginsrc.then((plugins) => {
   </tbody>
 </table>
 
-<h2 align="center">LICENSE</h2>
-
-> (MIT)
-
-> Copyright (c) 2016 Michael Ciniawsky <michael.ciniawsky@gmail.com>
-
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-> The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 [npm]: https://img.shields.io/npm/v/postcss-load-plugins.svg
 [npm-url]: https://npmjs.com/package/postcss-load-plugins
 
+[node]: https://img.shields.io/node/v/postcss-load-plugins.svg
+[node-url]: https://nodejs.org/
+
 [deps]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins.svg
 [deps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-plugins
 
-[style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
-[style-url]: http://standardjs.com/
-
-[travis]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg
-[travis-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-plugins
+[tests]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg
+[tests-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-plugins
 
 [cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=master
+
+[style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
+[style-url]: http://standardjs.com/
 
 [chat]: https://img.shields.io/gitter/room/postcss/postcss.svg?maxAge=2592000
 [chat-url]: https://gitter.im/postcss/postcss
