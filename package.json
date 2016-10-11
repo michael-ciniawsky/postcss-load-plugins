@@ -1,51 +1,53 @@
 {
   "name": "postcss-load-plugins",
-  "version": "2.0.0-alpha4",
+  "version": "2.0.0-beta",
   "description": "Autoload Plugins for PostCSS",
-  "engines": {"node": ">=4", "npm": ">=3"},
+  "engines": { "node": ">=4", "npm": ">=3" },
   "main": "index.js",
   "scripts": {
-    "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
-    "pretest": "echo '=> Linting' && npm run clean && standard",
-    "test": "echo '=> Testing' && nyc ava 'test/index.js'",
-    "start": "echo '=> Starting' && sudo npm test"
+    "lint": "standard",
+    "test": "nyc ava test/rc/index.js test/pkg/index.js test/js/index.js",
+    "logs": "standard-changelog > CHANGELOG.md",
+    "docs": "jsdoc2md index.js lib/plugins.js > INDEX.md",
+    "clean": "rm -rf .nyc_output coverage jsdoc-api dmd",
+    "start": "sudo npm run clean && npm run lint && sudo npm test"
   },
   "dependencies": {
-    "cosmiconfig": "^1.1.0",
-    "object-assign": "^4.1.0"
+    "cosmiconfig": "^2.0.0"
   },
   "devDependencies": {
+    "ava": "^0.16.0",
+    "coveralls": "^2.11.14",
+    "cssnano": "^3.7.7",
+    "jsdoc-to-markdown": "^2.0.0",
+    "nyc": "^8.3.1",
     "postcss": "^5.2.4",
-    "postcss-bem": "^0.4.1",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
-    "sugarss": "^0.1.6",
-    "ava": "^0.16.0",
-    "coveralls": "^2.11.13",
-    "nyc": "^8.3.0",
-    "standard": "^8.3.0"
+    "standard": "^8.4.0",
+    "standard-changelog": "0.0.1",
+    "sugarss": "^0.2.0"
   },
   "ava": {
     "verbose": "true"
   },
   "nyc": {
     "all": true,
-    "include": [
-      "lib",
-      "test"
-    ],
-    "extension": [
-      ".js"
-    ]
+    "include": ["lib", "test"],
+    "extension": [".js"]
   },
   "keywords": [
     "postcss",
-    "postcssplugins"
+    "postcss-plugin"
   ],
   "author": {
     "name": "Michael Ciniawky",
     "email": "michael.ciniawsky@gmail.com"
   },
+  "contributors": [{
+    "name": "Mateusz Derks",
+    "url": "http://ertrzyiks.me"
+  }],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/michael-ciniawsky/postcss-load-plugins.git"
