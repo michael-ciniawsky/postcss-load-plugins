@@ -32,6 +32,6 @@ $ git clone https://github.com/<user>/<sample>
 
 Please provide information about your environment.
 
-| OS           | Node  | npm     | PostCSS |
-|:------------:|:-----:|:-------:|:-------:|
-| OS X 10.12.x | 6.x   | 3.x     | 5.x     |
+| OS              | Node      | npm       | PostCSS   |
+|:---------------:|:---------:|:---------:|:---------:|
+| [name][version] | [version] | [version] | [version] |
