@@ -1,0 +1,14 @@
+{
+  "name": "postcss-config",
+  "version": "1.0.0",
+  "description": "PostCSS Config",
+  "main": "index.js",
+  "postcss": {
+    "plugins": {
+      "postcss-import": null,
+      "postcss-nested": null,
+      "cssnano": false
+    }
+  },
+  "license": "MIT"
+}
