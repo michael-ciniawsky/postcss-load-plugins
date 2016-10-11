@@ -31,7 +31,7 @@ Install plugins and save them to your ***package.json*** dependencies/devDepende
 
 ### `package.json`
 
-Create **`postcss`** section in your projects **`package.json`**
+Create **`postcss`** section in your projects **`package.json`**.
 
 ```
 App
@@ -53,7 +53,7 @@ App
 
 ### `.postcssrc`
 
-Create **`.postcssrc`** file
+Create a **`.postcssrc`** file.
 
 ```
 App
@@ -105,6 +105,8 @@ module.exports = (ctx) => {
 
 Plugin **options** can take the following values.
 
+
+
 **`null`**: Plugin loads with defaults.
 
 ```js
@@ -143,7 +145,7 @@ When using a function `(postcss.config.js)`, it is possible to pass context to `
 
 <h2 align="center">Examples</h2>
 
-**postcss.config.js**
+**`postcss.config.js`**
 
 ```js
 module.exports = (ctx) => {
