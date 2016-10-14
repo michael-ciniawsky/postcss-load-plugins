@@ -85,13 +85,19 @@ App
   |- package.json
 ```
 
+Plugins can be loaded in either using an `{Object}` or an `{Array}`.
+
+##### `{Object}`
+
 ```js
 module.exports = (ctx) => {
   plugins: {
-    'postcss-plugin': options
+    'postcss-plugin': ctx.plugin
   }
 }
 ```
+
+##### `{Array}`
 
 ```js
 module.exports = (ctx) => {
@@ -105,13 +111,10 @@ module.exports = (ctx) => {
 
 Plugin **options** can take the following values.
 
-
-
-**`null`**: Plugin loads with defaults.
-
 ```js
-'postcss-plugin': null
+'postcss-plugin': {} || null
 ```
+> :warning: `{}` must be an **empty** object
 
 **`[Object]`**: Plugin loads with given options.
 
@@ -132,9 +135,9 @@ Plugin **order** is determined by declaration in the plugins section.
 ```js
 {
   plugins: {
-    'postcss-plugin': false, // plugins[0]
-    'postcss-plugin': false, // plugins[1]
-    'postcss-plugin': {}     // plugins[2]
+    'postcss-plugin': {}, // plugins[0]
+    'postcss-plugin': {}, // plugins[1]
+    'postcss-plugin': {}  // plugins[2]
   }
 }
 ```
@@ -150,14 +153,14 @@ When using a function `(postcss.config.js)`, it is possible to pass context to `
 ```js
 module.exports = (ctx) => {
   plugins: {
-    postcss-import: null,
-    postcss-bem: ctx.bem || null,
-    cssnano: ctx.env === 'development' ? false : null
+    postcss-import: {},
+    postcss-bem: ctx.bem || {},
+    cssnano: ctx.env === 'development' ? false : {}
   }
 }
 ```
 
-### <img width="80" height="80" src="https://worldvectorlogo.com/logos/nodejs-icon.svg"> API
+### <img width="80" height="80" src="https://worldvectorlogo.com/logos/nodejs-icon.svg">
 
 ```js
 const { readFileSync } = require('fs')
@@ -173,7 +176,7 @@ pluginsrc(ctx).then((plugins) => {
   postcss(plugins)
     .process(css)
     .then(({ css }) => console.log(css))
-}))
+})
 ```
 
 <h2 align="center">Maintainers</h2>
