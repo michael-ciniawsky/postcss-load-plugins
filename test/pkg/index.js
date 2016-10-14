@@ -6,17 +6,21 @@
 
 var test = require('ava')
 
-const join = require('path').join
-const read = require('fs').readFileSync
+var join = require('path').join
+var read = require('fs').readFileSync
 
-const fixture = (file) => read(join(__dirname, 'fixtures', file), 'utf8')
-const expect = (file) => read(join(__dirname, 'expect', file), 'utf8')
+var fixture = function (file) {
+  return read(join(__dirname, 'fixtures', file), 'utf8')
+}
+var expect = function (file) {
+  return read(join(__dirname, 'expect', file), 'utf8')
+}
 
-const postcss = require('postcss')
-const pluginsrc = require('../..')
+var postcss = require('postcss')
+var pluginsrc = require('../..')
 
-test('package.json - {Object} - Load Plugins', (t) => {
-  return pluginsrc().then((plugins) => {
+test('package.json - {Object} - Load Plugins', function (t) {
+  return pluginsrc().then(function (plugins) {
     t.is(plugins.length, 2)
 
     t.is(plugins[0], require('postcss-import'))
@@ -24,24 +28,21 @@ test('package.json - {Object} - Load Plugins', (t) => {
   })
 })
 
-test('package.json - {Object} - Process CSS', (t) => {
-  return pluginsrc().then((plugins) => {
-    const options = {
-      from: 'fixtures/index.css',
-      to: 'expect/index.css'
-    }
+test('package.json - {Object} - Process CSS', function (t) {
+  return pluginsrc().then(function (plugins) {
+    var options = { from: 'fixtures/index.css', to: 'expect/index.css' }
 
     return postcss(plugins)
       .process(fixture('index.css'), options)
-      .then((result) => {
+      .then(function (result) {
         t.is(expect('index.css'), result.css)
       })
   })
 })
 
-test('package.json - {Object} - Process SSS', (t) => {
-  return pluginsrc().then((plugins) => {
-    const options = {
+test('package.json - {Object} - Process SSS', function (t) {
+  return pluginsrc().then(function (plugins) {
+    var options = {
       parser: require('sugarss'),
       from: 'fixtures/index.sss',
       to: 'expect/index.sss'
@@ -49,7 +50,7 @@ test('package.json - {Object} - Process SSS', (t) => {
 
     return postcss(plugins)
       .process(fixture('index.sss'), options)
-      .then((result) => {
+      .then(function (result) {
         t.is(expect('index.sss'), result.css)
       })
   })

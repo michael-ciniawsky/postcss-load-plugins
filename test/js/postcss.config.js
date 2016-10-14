@@ -1,9 +1,9 @@
-module.exports = (ctx) => {
+module.exports = function (ctx) {
   return {
     plugins: {
-      'postcss-import': null,
-      'postcss-nested': null,
-      'cssnano': ctx.env === 'development' ? false : null
+      'postcss-import': {},
+      'postcss-nested': {},
+      'cssnano': ctx.env === 'development' ? false : {}
     }
   }
 }
