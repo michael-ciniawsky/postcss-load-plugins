@@ -2,7 +2,7 @@
   "name": "postcss-load-plugins",
   "version": "2.0.0-beta",
   "description": "Autoload Plugins for PostCSS",
-  "engines": { "node": ">=4", "npm": ">=3" },
+  "engines": { "node": ">=0.12", "npm": ">=3" },
   "main": "index.js",
   "scripts": {
     "lint": "standard",
@@ -13,7 +13,8 @@
     "start": "sudo npm run clean && npm run lint && sudo npm test"
   },
   "dependencies": {
-    "cosmiconfig": "^2.0.0"
+    "cosmiconfig": "^2.1.0",
+    "object-assign": "^4.1.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",
@@ -33,7 +34,7 @@
   },
   "nyc": {
     "all": true,
-    "include": ["lib", "test"],
+    "include": ["index.js", "lib"],
     "extension": [".js"]
   },
   "keywords": [
@@ -44,10 +45,12 @@
     "name": "Michael Ciniawky",
     "email": "michael.ciniawsky@gmail.com"
   },
-  "contributors": [{
-    "name": "Mateusz Derks",
-    "url": "http://ertrzyiks.me"
-  }],
+  "contributors": [
+    {
+      "name": "Mateusz Derks",
+      "url": "http://ertrzyiks.me"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/michael-ciniawsky/postcss-load-plugins.git"
