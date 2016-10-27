@@ -31,9 +31,13 @@ var loadPlugins = require('./lib/plugins')
 module.exports = function pluginsrc (ctx, path, options) {
   var defaults = { cwd: process.cwd(), env: process.env.NODE_ENV }
 
-  ctx = assign(defaults, ctx) || defaults
+  ctx = assign(defaults, ctx)
   path = path || process.cwd()
   options = options || {}
+
+  if (ctx.env === undefined) {
+    process.env.NODE_ENV = 'development'
+  }
 
   return config('postcss', options)
     .load(path)
@@ -44,10 +48,7 @@ module.exports = function pluginsrc (ctx, path, options) {
         )
       }
 
-      result = result === undefined ? { config: {} } : result
-      result = result.config
-
-      return result
+      return result ? result.config : {}
     })
     .then(function (plugins) {
       if (typeof plugins === 'function') {
