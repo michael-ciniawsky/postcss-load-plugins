@@ -1,12 +1,12 @@
 {
   "name": "postcss-load-plugins",
-  "version": "2.0.0-rc",
+  "version": "2.0.0",
   "description": "Autoload Plugins for PostCSS",
   "engines": { "node": ">=0.12", "npm": ">=3" },
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test": "nyc ava test/rc/index.js test/pkg/index.js test/js/index.js",
+    "test": "nyc ava test/err/index.js test/rc/index.js test/pkg/index.js test/js/index.js",
     "logs": "standard-changelog > CHANGELOG.md",
     "docs": "jsdoc2md index.js lib/plugins.js > INDEX.md",
     "clean": "rm -rf .nyc_output coverage jsdoc-api dmd",
@@ -25,6 +25,7 @@
     "postcss": "^5.2.4",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
+    "postcss-sprites": "^4.0.0",
     "standard": "^8.4.0",
     "standard-changelog": "0.0.1",
     "sugarss": "^0.2.0"
