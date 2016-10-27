@@ -1,11 +1,11 @@
 {
   "name": "postcss-config",
   "version": "1.0.0",
-  "description": "PostCSS Config",
   "postcss": {
     "plugins": {
       "postcss-import": {},
       "postcss-nested": {},
+      "postcss-sprites": {},
       "cssnano": false
     }
   }

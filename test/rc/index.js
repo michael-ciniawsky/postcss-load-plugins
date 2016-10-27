@@ -21,10 +21,11 @@ var pluginsrc = require('../..')
 
 test('.postcssrc - {Object} - Load Plugins', function (t) {
   return pluginsrc().then(function (plugins) {
-    t.is(plugins.length, 2)
+    t.is(plugins.length, 3)
 
     t.is(plugins[0], require('postcss-import'))
     t.is(plugins[1], require('postcss-nested'))
+    t.is(plugins[2], require('postcss-sprites'))
   })
 })
 

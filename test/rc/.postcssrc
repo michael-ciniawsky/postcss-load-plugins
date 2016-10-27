@@ -2,6 +2,7 @@
   "plugins": {
     "postcss-import": {},
     "postcss-nested": {},
+    "postcss-sprites": {},
     "cssnano": false
   }
 }

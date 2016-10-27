@@ -23,10 +23,11 @@ test('postcss.config.js - {Function} - Load Plugins', function (t) {
   process.env.NODE_ENV = 'development'
 
   return pluginsrc().then(function (plugins) {
-    t.is(plugins.length, 2)
+    t.is(plugins.length, 3)
 
     t.is(plugins[0], require('postcss-import'))
     t.is(plugins[1], require('postcss-nested'))
+    t.is(plugins[2], require('postcss-sprites'))
   })
 })
 
@@ -34,11 +35,12 @@ test('postcss.config.js - {Function} - Load Plugins', function (t) {
   process.env.NODE_ENV = 'production'
 
   return pluginsrc().then(function (plugins) {
-    t.is(plugins.length, 3)
+    t.is(plugins.length, 4)
 
     t.is(plugins[0], require('postcss-import'))
     t.is(plugins[1], require('postcss-nested'))
-    t.is(plugins[2], require('cssnano'))
+    t.is(plugins[2], require('postcss-sprites'))
+    t.is(plugins[3], require('cssnano'))
   })
 })
 

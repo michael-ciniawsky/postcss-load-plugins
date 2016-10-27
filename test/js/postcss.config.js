@@ -3,6 +3,7 @@ module.exports = function (ctx) {
     plugins: {
       'postcss-import': {},
       'postcss-nested': {},
+      'postcss-sprites': {},
       'cssnano': ctx.env === 'development' ? false : {}
     }
   }
