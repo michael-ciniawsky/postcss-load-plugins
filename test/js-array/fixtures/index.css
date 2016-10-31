@@ -1,0 +1,17 @@
+@import 'imports/section.css';
+
+.test {
+  color: cyan;
+
+  &__yellow {
+    color: yellow;
+  }
+
+  &__navy {
+    color: navy;
+  }
+
+  &__crimson {
+    color: crimson;
+  }
+}
