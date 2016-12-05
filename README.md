@@ -91,8 +91,10 @@ Plugins can be loaded in either using an `{Object}` or an `{Array}`.
 
 ```js
 module.exports = (ctx) => {
-  plugins: {
-    'postcss-plugin': ctx.plugin
+  return {
+    plugins: {
+      'postcss-plugin': ctx.plugin
+    }
   }
 }
 ```
@@ -101,9 +103,11 @@ module.exports = (ctx) => {
 
 ```js
 module.exports = (ctx) => {
-  plugins: [
-    require('postcss-plugin')(ctx.plugin)
-  ]
+  return {
+    plugins: [
+      require('postcss-plugin')(ctx.plugin)
+    ]
+  }
 }
 ```
 
@@ -111,18 +115,21 @@ module.exports = (ctx) => {
 
 Plugin **options** can take the following values.
 
+**`{}`: Plugin loads with defaults**
+
 ```js
 'postcss-plugin': {} || null
 ```
+
 > :warning: `{}` must be an **empty** object
 
-**`[Object]`**: Plugin loads with given options.
+**`{Object}`: Plugin loads with options**
 
 ```js
 'postcss-plugin': { option: '', option: '' }
 ```
 
-**`false`**: Plugin will not be loaded.
+**`false`: Plugin will not be loaded**
 
 ```js
 'postcss-plugin': false
@@ -152,10 +159,12 @@ When using a function `(postcss.config.js)`, it is possible to pass context to `
 
 ```js
 module.exports = (ctx) => {
-  plugins: {
-    postcss-import: {},
-    postcss-bem: ctx.bem || {},
-    cssnano: ctx.env === 'development' ? false : {}
+  return {
+    plugins: {
+      postcss-import: {},
+      postcss-modules: ctx.modules ? {} : false,
+      cssnano: ctx.env === 'production' ? {} : false
+    }
   }
 }
 ```
@@ -170,7 +179,7 @@ const pluginsrc = require('postcss-load-plugins')
 
 const css = readFileSync('index.css', 'utf8')
 
-const ctx = { bem: { style: 'bem' } }
+const ctx = { modules: true }
 
 pluginsrc(ctx).then((plugins) => {
   postcss(plugins)
@@ -185,16 +194,31 @@ pluginsrc(ctx).then((plugins) => {
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150"
-        src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
-        <br />
+        <img width="150" height="150"
+        src="https://github.com/michael-ciniawsky.png?v=3&s=150">
+        <br>
         <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
       </td>
       <td align="center">
-        <img width="150 height="150"
-        src="https://avatars.githubusercontent.com/u/2437969?v=3&s=150">
-        <br />
+        <img width="150" height="150"
+        src="https://github.com/ertrzyiks.png?v=3&s=150">
+        <br>
         <a href="https://github.com/ertrzyiks">Mateusz Derks</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 align="center">Contributors</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://github.com/Kovensky.png?v=3&s=150">
+        <br>
+        <a href="https://github.com/Kovensky">Diogo Franco</a>
       </td>
     </tr>
   </tbody>
@@ -213,11 +237,11 @@ pluginsrc(ctx).then((plugins) => {
 [tests]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-plugins.svg
 [tests-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-plugins
 
-[cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg?branch=master
-[cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins?branch=master
+[cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-plugins/badge.svg
+[cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-plugins
 
 [style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
 [style-url]: http://standardjs.com/
 
-[chat]: https://img.shields.io/gitter/room/postcss/postcss.svg?maxAge=2592000
+[chat]: https://img.shields.io/gitter/room/postcss/postcss.svg
 [chat-url]: https://gitter.im/postcss/postcss
