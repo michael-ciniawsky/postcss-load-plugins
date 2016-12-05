@@ -6,6 +6,7 @@
       "postcss-import": {},
       "postcss-nested": {},
       "postcss-sprites": {},
+      "postcss-cssnext": { "warnForDuplicates": false },
       "cssnano": false
     }
   }

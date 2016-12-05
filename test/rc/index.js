@@ -6,34 +6,41 @@
 
 var test = require('ava')
 
-var join = require('path').join
+var path = require('path')
 var read = require('fs').readFileSync
-
-var fixture = function (file) {
-  return read(join(__dirname, 'fixtures', file), 'utf8')
-}
-var expect = function (file) {
-  return read(join(__dirname, 'expect', file), 'utf8')
-}
 
 var postcss = require('postcss')
 var pluginsrc = require('../..')
 
-test('.postcssrc - {Object} - Load Plugins', function (t) {
-  return pluginsrc().then(function (plugins) {
-    t.is(plugins.length, 3)
+var fixture = function (file) {
+  return read(path.join(__dirname, 'fixtures', file), 'utf8')
+}
 
-    t.is(plugins[0], require('postcss-import'))
-    t.is(plugins[1], require('postcss-nested'))
-    t.is(plugins[2], require('postcss-sprites'))
+var expect = function (file) {
+  return read(path.join(__dirname, 'expect', file), 'utf8')
+}
+
+test('.postcssrc - {Object} - Load Plugins', function (t) {
+  return pluginsrc({}, 'test/rc/').then(function (config) {
+    var plugins = config.plugins
+
+    t.is(plugins.length, 4)
+    t.is(plugins[0].postcssPlugin, 'postcss-import')
+    t.is(plugins[1].postcssPlugin, 'postcss-nested')
+    t.is(plugins[2].postcssPlugin, 'postcss-sprites')
+    t.is(plugins[3].postcssPlugin, 'postcss-cssnext')
+
+    t.is(config.file, path.resolve('test/rc/.postcssrc'))
   })
 })
 
 test('.postcssrc - {Object} - Process CSS', function (t) {
-  return pluginsrc().then(function (plugins) {
+  return pluginsrc({}, 'test/rc/').then(function (config) {
+    var plugins = config.plugins
+
     var options = {
-      from: 'fixtures/index.css',
-      to: 'expect/index.css'
+      from: 'test/rc/fixtures/index.css',
+      to: 'test/rc/expect/index.css'
     }
 
     return postcss(plugins)
@@ -45,11 +52,13 @@ test('.postcssrc - {Object} - Process CSS', function (t) {
 })
 
 test('.postcssrc - {Object} - Process SSS', function (t) {
-  return pluginsrc().then(function (plugins) {
+  return pluginsrc({}, 'test/rc/').then(function (config) {
+    var plugins = config.plugins
+
     var options = {
       parser: require('sugarss'),
-      from: 'fixtures/index.sss',
-      to: 'expect/index.sss'
+      from: 'test/rc/fixtures/index.sss',
+      to: 'test/rc/expect/index.sss'
     }
 
     return postcss(plugins)

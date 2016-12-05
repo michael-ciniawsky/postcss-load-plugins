@@ -4,7 +4,8 @@ module.exports = function (ctx) {
       'postcss-import': {},
       'postcss-nested': {},
       'postcss-sprites': {},
-      'cssnano': ctx.env === 'development' ? false : {}
+      'postcss-cssnext': { warnForDuplicates: false },
+      'cssnano': ctx.env === 'production' ? {} : false
     }
   }
 }
