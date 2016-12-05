@@ -4,6 +4,8 @@
 
 'use strict'
 
+var resolve = require('path').resolve
+
 var config = require('cosmiconfig')
 var assign = require('object-assign')
 
@@ -12,6 +14,7 @@ var loadPlugins = require('./lib/plugins')
 /**
  * @author Michael Ciniawsky (@michael-ciniawsky) <michael.ciniawsky@gmail.com>
  * @description Autoload Plugins for PostCSS
+ * @license MIT
  *
  * @module postcss-load-plugins
  * @version 1.0.0
@@ -29,24 +32,26 @@ var loadPlugins = require('./lib/plugins')
  * @return {Array} config PostCSS Plugins
  */
 module.exports = function pluginsrc (ctx, path, options) {
-  var defaults = { cwd: process.cwd(), env: process.env.NODE_ENV }
+  ctx = assign({ cwd: process.cwd(), env: process.env.NODE_ENV }, ctx)
 
-  ctx = assign(defaults, ctx)
-  path = path || process.cwd()
-  options = options || {}
+  path = path ? resolve(path) : process.cwd()
+
+  options = assign({}, options)
 
   if (ctx.env === undefined) {
     process.env.NODE_ENV = 'development'
   }
 
+  var file
+
   return config('postcss', options)
     .load(path)
     .then(function (result) {
       if (result === undefined) {
-        console.log(
-          'PostCSS Plugins could not be loaded. Please check your PostCSS Config.'
-        )
+        console.log('PostCSS Plugins could not be loaded.' + path)
       }
+
+      file = result ? result.filepath : ''
 
       return result ? result.config : {}
     })
@@ -62,7 +67,10 @@ module.exports = function pluginsrc (ctx, path, options) {
         plugins.plugins = []
       }
 
-      return loadPlugins(plugins)
+      return {
+        plugins: loadPlugins(plugins),
+        file: file
+      }
     })
     .catch(function (err) {
       console.log(err)
