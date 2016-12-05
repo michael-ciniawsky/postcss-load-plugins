@@ -1,4 +1,4 @@
-module.exports = (ctx) => {
+module.exports = function (ctx) {
   return {
     plugins: {
       'hans': {},
