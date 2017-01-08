@@ -1,5 +1,5 @@
 // ------------------------------------
-// #POSTCSS - LOAD PlUGINS - RC - TEST
+// # POSTCSS - LOAD PlUGINS - TEST - RC
 // ------------------------------------
 
 'use strict'
@@ -21,7 +21,7 @@ var expect = function (file) {
 }
 
 test('.postcssrc - {Object} - Load Plugins', function (t) {
-  return pluginsrc({}, 'test/rc/').then(function (config) {
+  return pluginsrc({}, 'test/rc').then(function (config) {
     var plugins = config.plugins
 
     t.is(plugins.length, 4)
@@ -35,7 +35,7 @@ test('.postcssrc - {Object} - Load Plugins', function (t) {
 })
 
 test('.postcssrc - {Object} - Process CSS', function (t) {
-  return pluginsrc({}, 'test/rc/').then(function (config) {
+  return pluginsrc({}, 'test/rc').then(function (config) {
     var plugins = config.plugins
 
     var options = {
@@ -52,7 +52,7 @@ test('.postcssrc - {Object} - Process CSS', function (t) {
 })
 
 test('.postcssrc - {Object} - Process SSS', function (t) {
-  return pluginsrc({}, 'test/rc/').then(function (config) {
+  return pluginsrc({}, 'test/rc').then(function (config) {
     var plugins = config.plugins
 
     var options = {

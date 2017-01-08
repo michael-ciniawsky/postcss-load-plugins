@@ -1,29 +1,47 @@
-// ------------------------------------
-// #POSTCSS - LOAD PLUGINS - TEST - ERR
-// ------------------------------------
+// -------------------------------------
+// # POSTCSS - LOAD PLUGINS - TEST - ERR
+// -------------------------------------
 
 'use strict'
 
 var test = require('ava')
 
-var path = require('path')
+// var path = require('path')
 
 var pluginsrc = require('../..')
 
-test('No Config', function (t) {
-  return pluginsrc().then(function (config) {
-    t.is(config.file, '')
-
-    t.is(config.plugins.length, 0)
-    t.deepEqual(config.plugins, [])
+test('No Config - {Error} - Load Plugins', function (t) {
+  return pluginsrc({}, 'test').catch(function (err) {
+    t.is(err.message, 'No PostCSS Config found in: /Users/Cini/Github/PostCSS/postcss-load-plugins/test')
   })
 })
 
-test('Invalid Config', function (t) {
-  return pluginsrc({}, 'test/err/').then(function (config) {
-    t.is(config.file, path.resolve('test/err/postcss.config.js'))
+test('No Plugin - {Error} - Load Plugins', function (t) {
+  return pluginsrc({}, 'test/err/object').catch(function (err) {
+    t.is(err.message, "Loading PostCSS Plugin failed: Cannot find module 'no plugin'")
+  })
+})
 
-    t.is(config.plugins.length, 0)
-    t.deepEqual(config.plugins, [])
+test('No Plugin (Options) - {Error} - Load Plugins', function (t) {
+  var ctx = { next: 1 }
+
+  return pluginsrc(ctx, 'test/err/object').catch(function (err) {
+    t.is(err.message, "Loading PostCSS Plugin failed: Cannot find module 'no plugin options'")
+  })
+})
+
+test('Invalid Plugin {Object} - {Error} - Load Plugins', function (t) {
+  var ctx = { next: 2 }
+
+  return pluginsrc(ctx, 'test/err/object').catch(function (err) {
+    t.is(err.message, 'Invalid PostCSS Plugin found: [0]')
+  })
+})
+
+test('Invalid Plugin {Array} - {Error} - Load Plugins', function (t) {
+  var ctx = { next: 2 }
+
+  return pluginsrc(ctx, 'test/err/array').catch(function (err) {
+    t.is(err.message, 'Invalid PostCSS Plugin found: [0]')
   })
 })

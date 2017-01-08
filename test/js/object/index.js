@@ -1,5 +1,5 @@
 // ------------------------------------
-// #POSTCSS - LOAD PlUGINS - TEST
+// # POSTCSS - LOAD PlUGINS - TEST - JS
 // ------------------------------------
 
 'use strict'
@@ -21,7 +21,7 @@ var expect = function (file) {
 }
 
 test('postcss.config.js - {Function} - Load Plugins', function (t) {
-  return pluginsrc({}, 'test/js/object/').then(function (config) {
+  return pluginsrc({}, 'test/js/object').then(function (config) {
     var plugins = config.plugins
 
     t.is(plugins.length, 4)
@@ -37,7 +37,7 @@ test('postcss.config.js - {Function} - Load Plugins', function (t) {
 test('postcss.config.js - {Function} - Load Plugins', function (t) {
   process.env.NODE_ENV = 'production'
 
-  return pluginsrc({}, 'test/js/object/').then(function (config) {
+  return pluginsrc({}, 'test/js/object').then(function (config) {
     var plugins = config.plugins
 
     t.is(plugins.length, 5)
@@ -52,7 +52,7 @@ test('postcss.config.js - {Function} - Load Plugins', function (t) {
 })
 
 test('postcss.config.js - {Function} - Process CSS', function (t) {
-  return pluginsrc({}, 'test/js/object/').then(function (config) {
+  return pluginsrc({}, 'test/js/object').then(function (config) {
     var plugins = config.plugins
 
     var options = {
@@ -69,7 +69,7 @@ test('postcss.config.js - {Function} - Process CSS', function (t) {
 })
 
 test('postcss.config.js - {Function} - Process SSS', function (t) {
-  return pluginsrc({}, 'test/js/object/').then(function (config) {
+  return pluginsrc({}, 'test/js/object').then(function (config) {
     var plugins = config.plugins
 
     var options = {
