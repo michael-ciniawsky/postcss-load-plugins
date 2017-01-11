@@ -6,8 +6,6 @@
 
 var test = require('ava')
 
-// var path = require('path')
-
 var pluginsrc = require('../..')
 
 test('No Config - {Error} - Load Plugins', function (t) {
