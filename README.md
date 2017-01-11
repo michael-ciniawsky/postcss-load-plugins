@@ -12,7 +12,6 @@
     <img width="110" height="110" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="10">
   </a>
   <h1>Load Plugins</h1>
-  <p>Autoload Plugins for PostCSS<p>
 </div>
 
 <h2 align="center">Install</h2>
@@ -90,25 +89,21 @@ Plugins can be loaded in either using an `{Object}` or an `{Array}`.
 ##### `{Object}`
 
 ```js
-module.exports = (ctx) => {
-  return {
-    plugins: {
-      'postcss-plugin': ctx.plugin
-    }
+module.exports = (ctx) => ({
+  plugins: {
+    'postcss-plugin': ctx.plugin
   }
-}
+})
 ```
 
 ##### `{Array}`
 
 ```js
-module.exports = (ctx) => {
-  return {
-    plugins: [
-      require('postcss-plugin')(ctx.plugin)
-    ]
-  }
-}
+module.exports = (ctx) => ({
+  plugins: [
+    require('postcss-plugin')(ctx.plugin)
+  ]
+})
 ```
 
 <h2 align="center">Options</h2>
@@ -158,15 +153,13 @@ When using a function `(postcss.config.js)`, it is possible to pass context to `
 **`postcss.config.js`**
 
 ```js
-module.exports = (ctx) => {
-  return {
-    plugins: {
-      postcss-import: {},
-      postcss-modules: ctx.modules ? {} : false,
-      cssnano: ctx.env === 'production' ? {} : false
-    }
+module.exports = (ctx) => ({
+  plugins: {
+    postcss-import: {},
+    postcss-modules: ctx.modules ? {} : false,
+    cssnano: ctx.env === 'production' ? {} : false
   }
-}
+})
 ```
 
 ### <img width="80" height="80" src="https://worldvectorlogo.com/logos/nodejs-icon.svg">
@@ -184,7 +177,7 @@ const ctx = { modules: true }
 pluginsrc(ctx).then((plugins) => {
   postcss(plugins)
     .process(css)
-    .then(({ css }) => console.log(css))
+    .then((result) => console.log(result.css))
 })
 ```
 
