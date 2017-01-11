@@ -1,13 +1,13 @@
 {
   "name": "postcss-load-plugins",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Autoload Plugins for PostCSS",
-  "engines": { "node": ">=0.12", "npm": ">=3" },
+  "engines": { "node": ">=0.12" },
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test": "nyc ava test/err/index.js test/rc/index.js test/pkg/index.js test/js/**/index.js",
-    "logs": "standard-changelog > CHANGELOG.md",
+    "test": "nyc ava -v test/err/index.js test/rc/index.js test/pkg/index.js test/js/**/index.js",
+    "logs": "standard-changelog -i CHANGELOG.md -w",
     "docs": "jsdoc2md index.js lib/plugins.js > INDEX.md",
     "clean": "rm -rf .nyc_output coverage jsdoc-api dmd",
     "start": "sudo npm run clean && npm run lint && sudo npm test"
@@ -19,26 +19,18 @@
   "devDependencies": {
     "ava": "^0.17.0",
     "coveralls": "^2.11.15",
-    "cssnano": "^3.8.1",
+    "cssnano": "^3.10.0",
     "jsdoc-to-markdown": "^2.0.0",
-    "nyc": "^9.0.1",
+    "nyc": "^10.0.0",
     "peter": "^1.0.2",
-    "postcss": "^5.2.6",
+    "postcss": "^5.2.8",
     "postcss-cssnext": "^2.8.0",
     "postcss-import": "^9.0.0",
     "postcss-nested": "^1.0.0",
-    "postcss-sprites": "^4.0.0",
+    "postcss-sprites": "^4.1.1",
     "standard": "^8.6.0",
     "standard-changelog": "0.0.1",
     "sugarss": "^0.2.0"
-  },
-  "ava": {
-    "verbose": "true"
-  },
-  "nyc": {
-    "all": true,
-    "include": ["index.js", "lib"],
-    "extension": [".js"]
   },
   "files": [
     "lib",
@@ -64,7 +56,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/michael-ciniawsky/postcss-load-plugins.git"
+    "url": "https://github.com/michael-ciniawsky/postcss-load-plugins.git"
   },
   "bugs": {
     "url": "https://github.com/michael-ciniawsky/postcss-load-plugins/issues"
