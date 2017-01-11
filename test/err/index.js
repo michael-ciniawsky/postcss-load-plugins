@@ -10,7 +10,7 @@ var pluginsrc = require('../..')
 
 test('No Config - {Error} - Load Plugins', function (t) {
   return pluginsrc({}, 'test').catch(function (err) {
-    t.is(err.message, 'No PostCSS Config found in: /Users/Cini/Github/PostCSS/postcss-load-plugins/test')
+    t.is(err.message, 'No PostCSS Config found in: /home/travis/build/michael-ciniawsky/postcss-load-plugins/test')
   })
 })
 
