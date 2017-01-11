@@ -16,8 +16,9 @@ Autoload Plugins for PostCSS
 **Kind**: global function  
 **Returns**: <code>Array</code> - config PostCSS Plugins  
 **Requires**: <code>module:cosmiconfig</code>, <code>module:object-assign</code>, <code>module:./lib/plugins.js</code>  
-**Version**: 1.0.0  
+**Version**: 2.2.0  
 **Author:** Michael Ciniawsky (@michael-ciniawsky) <michael.ciniawsky@gmail.com>  
+**License**: MIT  
 
 | Param | Type | Description |
 | --- | --- | --- |
