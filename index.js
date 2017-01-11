@@ -1,5 +1,5 @@
 // ------------------------------------
-// #POSTCSS - LOAD PLUGINS - INDEX
+// # POSTCSS - LOAD PLUGINS - INDEX
 // ------------------------------------
 
 'use strict'
@@ -12,12 +12,13 @@ var assign = require('object-assign')
 var loadPlugins = require('./lib/plugins')
 
 /**
+ * Autoload Plugins for PostCSS
+ *
  * @author Michael Ciniawsky (@michael-ciniawsky) <michael.ciniawsky@gmail.com>
- * @description Autoload Plugins for PostCSS
  * @license MIT
  *
  * @module postcss-load-plugins
- * @version 1.0.0
+ * @version 2.2.0
  *
  * @requires cosmiconfig
  * @requires object-assign
@@ -38,41 +39,25 @@ module.exports = function pluginsrc (ctx, path, options) {
 
   options = assign({}, options)
 
-  if (ctx.env === undefined) {
-    process.env.NODE_ENV = 'development'
-  }
+  if (!ctx.env) process.env.NODE_ENV = 'development'
 
   var file
 
   return config('postcss', options)
     .load(path)
     .then(function (result) {
-      if (result === undefined) {
-        console.log('PostCSS Plugins could not be loaded.' + path)
-      }
+      if (!result) throw new Error('No PostCSS Config found in: ' + path)
 
       file = result ? result.filepath : ''
 
       return result ? result.config : {}
     })
     .then(function (plugins) {
-      if (typeof plugins === 'function') {
-        plugins = plugins(ctx)
-      }
-      if (typeof result === 'object') {
-        plugins = assign(plugins, ctx)
-      }
+      if (typeof plugins === 'function') plugins = plugins(ctx)
+      else plugins = assign(plugins, ctx)
 
-      if (!plugins.plugins) {
-        plugins.plugins = []
-      }
+      if (!plugins.plugins) plugins.plugins = []
 
-      return {
-        plugins: loadPlugins(plugins),
-        file: file
-      }
-    })
-    .catch(function (err) {
-      console.log(err)
+      return { plugins: loadPlugins(plugins), file: file }
     })
 }
