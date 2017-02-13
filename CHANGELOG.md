@@ -1,3 +1,13 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/michael-ciniawsky/postcss-load-plugins/compare/v2.2.0...v2.3.0) (2017-02-13)
+
+
+### Features
+
+* **index:** Allow extensions for .postcssrc ([65cc0d0](https://github.com/michael-ciniawsky/postcss-load-plugins/commit/65cc0d0))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2017-01-11)
 
