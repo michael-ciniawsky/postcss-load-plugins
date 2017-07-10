@@ -23,7 +23,7 @@
     "jsdoc-to-markdown": "^3.0.0",
     "nyc": "^11.0.1",
     "postcss": "^6.0.3",
-    "postcss-cssnext": "^2.8.0",
+    "postcss-cssnext": "^3.0.0",
     "postcss-import": "^9.1.0",
     "postcss-nested": "^1.0.0",
     "postcss-sprites": "^4.2.0",
