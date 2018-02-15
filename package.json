@@ -17,7 +17,7 @@
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "ava": "^0.23.0",
+    "ava": "^0.25.0",
     "coveralls": "^2.11.16",
     "cssnano": "^3.10.0",
     "jsdoc-to-markdown": "^4.0.0",
